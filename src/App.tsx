@@ -7,6 +7,36 @@ const API_URL =
     ? "http://localhost:3001"
     : "https://api.covidengine.ml";
 
+const sessionUserId = getSessionUserId();
+
+function createSessionUserId() {
+  function randNum() {
+    return window.crypto.getRandomValues(new Uint32Array(1))[0] + "";
+  }
+  function getRandStr() {
+    // 256 bit of entropy
+    return btoa(
+      randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum()
+    );
+  }
+  const randStr = getRandStr();
+  localStorage.setItem("sessionUserId", randStr);
+  return randStr;
+}
+function getSessionUserId() {
+  const tmp = localStorage.getItem("sessionUserId");
+  return tmp ? tmp : createSessionUserId();
+}
+
+console.log("sessionUserId", sessionUserId);
+
 function App() {
   return (
     <Router>
@@ -214,6 +244,7 @@ function CSVUpload() {
     const formData = new FormData();
 
     formData.append("csv", selectedFile);
+    formData.append("sessionUserId", sessionUserId);
 
     fetch(`${API_URL}/uploadcsv`, {
       method: "POST",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import "./App.css";
 
 const API_URL =
@@ -55,6 +55,9 @@ function App() {
         </Route>
         <Route path="/clear">
           <Clear />
+        </Route>
+        <Route path="/reconcile">
+          <Reconcile />
         </Route>
         <Route path="/">
           <Home />
@@ -231,9 +234,32 @@ function Transaction() {
   );
 }
 
+function Reconcile(props:any) {
+  return (
+    <div className="App">
+      <section className="container-small2">
+        <h1>Please reconcile</h1>
+        <div className="hr" />
+        <div className="grid-2">
+          <div>
+            {/* <h2>Connect your Bank</h2> */}
+            <aside>please stay at home and contact healthline</aside>
+            {/* <a href="https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=https://oauth.covidengine.ml/auth/akahu&scope=ENDURING_CONSENT">
+              <button className="primary">Connect your Bank</button>
+            </a> */}
+            <pre>{JSON.stringify(props)}</pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function CSVUpload() {
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [lois, setLois] = useState(false);
 
   const changeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -241,6 +267,7 @@ function CSVUpload() {
   };
 
   const handleSubmission = () => {
+    setLoading(true);
     const formData = new FormData();
 
     formData.append("csv", selectedFile);
@@ -252,12 +279,36 @@ function CSVUpload() {
     })
       .then((response) => response.json())
       .then((result) => {
+        setLoading(false);
+        setLois(result.lois);
         console.log("Success:", result);
       })
       .catch((error) => {
+        setLoading(false);
         console.error("Error:", error);
       });
   };
+  if (lois) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/reconcile",
+          // search: "?utm=your+face",
+          state: { lois },
+        }}
+      />
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="App">
+        <section className="container-small2">
+          <h1>Processing...</h1>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="App">

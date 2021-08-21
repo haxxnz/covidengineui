@@ -213,7 +213,7 @@ function Issue() {
         <Map lois={lois} />
         <div className="hr" />
         <p>
-          Please review the following events and scan the QR codes to import the
+          Please review the exposure events and scan the QR codes to import the
           missed scan-ins to the NZ Covid Tracer app
         </p>
         <div className="hr" />

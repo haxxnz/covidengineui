@@ -4,10 +4,8 @@ import {
   Switch,
   Route,
   Link,
-
   useLocation,
   useHistory,
-
   Redirect,
 
 } from "react-router-dom";

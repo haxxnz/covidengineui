@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -273,7 +273,7 @@ function Transaction() {
 }
 
 function Reconcile(props: any) {
-  const [lois] = useState<LOI[] | null>(getLois());
+  const lois = useMemo(() => getLois(), []);
   if (lois === null) {
     return (
       <Redirect

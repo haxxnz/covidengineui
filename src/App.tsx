@@ -285,32 +285,6 @@ function Transaction() {
   );
 }
 
-function Reconcile(props: any) {
-  const lois = useMemo(() => getLois(), []);
-  if (lois === null) {
-    return (
-      <Redirect
-        to={{
-          pathname: "/",
-        }}
-      />
-    );
-  }
-  return (
-    <div className="App">
-      <section className="container-small2">
-        <h1>Please reconcile</h1>
-        <div className="hr" />
-        <div className="grid-2">
-          <div>
-            <aside>please stay at home and contact healthline</aside>
-            <pre>{JSON.stringify(lois, null, 2)}</pre>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
 
 
 function CSVUpload() {

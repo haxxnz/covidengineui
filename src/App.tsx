@@ -18,6 +18,12 @@ function App() {
         <Route path="/loading">
           <Loading />
         </Route>
+                <Route path="/issue">
+          <Issue />
+        </Route>
+                <Route path="/clear">
+          <Clear />
+        </Route>
         <Route path="/">
           <Home />
         </Route>
@@ -67,6 +73,36 @@ function Loading() {
     </section></div>;
 }
 
+function Issue() {
+  return <div className="App">
+    <section className='container-small3'>
+
+      <h1 >You might be exposed to COVID </h1>
+       <aside  className='title-description'>Please stay at home and 
+        contact healthline for a COVID Test</aside>
+      <h3>Potential Exposure Events</h3>
+
+      <div className="hr" />
+      <p><strong>MCDonalds Grafton</strong><br/>60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021  </p>
+
+      <div className="hr" />
+      <p><strong>MCDonalds Grafton</strong><br/>60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021  </p>
+
+      <div className="hr" />
+      <p><strong>MCDonalds Grafton</strong><br/>60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021  </p>
+     <button  style={{margin: "1.5rem 0 0 0"}} className="primary">Send Data to Ministry of health</button>
+ <button style={{margin: "1rem 0 0 0"}} className="primary">Contact HealthLine</button>
+    </section></div>;
+}
+
+function Clear() {
+  return <div className="App">
+    <section className='container-small3'>
+<h1 style={{textAlign: "center"}}>All clear!</h1>
+
+    </section></div>;
+}
+
 function Transaction() {
   return <div className="App">
     <section className='container-small2'>
@@ -77,7 +113,7 @@ function Transaction() {
           <Link to="/transaction"><button className="primary">Connect your Bank</button></Link></div>
         <div><h2>Upload a CSV</h2><aside>You can find this by logging into your bank on your computer - it’s a spreadsheet you can download.
           <br /><br />We don’t store any of your bank data.</aside>
-          <Link to="/csv"><button className="primary">Upload CSV</button></Link></div>
+          <Link to="/csv"><button  className="primary">Upload CSV</button></Link></div>
       </div>
 
 

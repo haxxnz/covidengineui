@@ -6,11 +6,10 @@ import {
   Link,
   useHistory,
   Redirect,
-
 } from "react-router-dom";
 import "./App.css";
 import { Map } from "./map";
-import QRCode from 'qrcode.react';
+import QRCode from "qrcode.react";
 import { Base64 } from "js-base64";
 
 const API_URL =
@@ -68,9 +67,9 @@ export type LOI = {
   information: string;
   coordinates: ICoordinates;
   transactions: ImpoverishedTransaction[];
-  eventId: string
-  glnHash?: string
-  gln?: string
+  eventId: string;
+  glnHash?: string;
+  gln?: string;
 };
 
 function saveLois(lois: LOI[]) {
@@ -180,15 +179,15 @@ function Loading() {
 
 function loiToQrValue(loi: LOI) {
   const data = {
-    typ: 'entry',
+    typ: "entry",
     gln: loi.gln,
     opn: loi.event,
     adr: loi.location,
     ver: "c19:1",
-  }
-  const dataStr = JSON.stringify(data)
-  const b64 = Base64.encode(dataStr)
-  return `NZCOVIDTRACER:${b64}`
+  };
+  const dataStr = JSON.stringify(data);
+  const b64 = Base64.encode(dataStr);
+  return `NZCOVIDTRACER:${b64}`;
 }
 
 function Issue() {
@@ -213,6 +212,11 @@ function Issue() {
         <h3>Potential Exposure Events</h3>
         <Map lois={lois} />
         <div className="hr" />
+        <p>
+          Please review the following events and scan the QR codes to import the
+          missed scan-ins to the NZ Covid Tracer app
+        </p>
+        <div className="hr" />
         {lois.map((loi) => (
           <>
             <p>
@@ -224,13 +228,34 @@ function Issue() {
               </strong>
               <br />
               {loi.location}
-              {/* <br />  */}
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: "center"}}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 {new Date(loi.start).toLocaleString("en-US")} -{" "}
                 {new Date(loi.end).toLocaleString("en-US")}
-                {loi.gln ? <QRCode value={loiToQrValue(loi)} /> : null}
+                <div>
+                  {loi.gln ? (
+                    <QRCode value={loiToQrValue(loi)} />
+                  ) : (
+                    <div
+                      style={{
+                        width: 128,
+                        height: 128,
+                        border: "1px solid black",
+                        display: "flex",
+                        textAlign: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      QR code not available
+                    </div>
+                  )}
+                </div>
               </div>
-
             </p>
 
             <div className="hr" />
@@ -311,12 +336,9 @@ function Transaction() {
   );
 }
 
-
-
 function CSVUpload() {
   const history = useHistory();
 
-  
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -376,8 +398,8 @@ function CSVUpload() {
         <div className="hr" />
         <aside>
           Only ANZ and BNZ accounts are supported.
-          <br/>
-          <br/>
+          <br />
+          <br />
         </aside>
         <div className="grid-2">
           <input type="file" name="file" onChange={changeHandler} />

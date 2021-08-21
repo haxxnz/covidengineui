@@ -89,14 +89,15 @@ function App() {
         <Route path="/loading">
           <Loading />
         </Route>
-        <Route path="/issue">
+        {/* <Route path="/issue">
           <Issue />
-        </Route>
+        </Route> */}
         <Route path="/clear">
           <Clear />
         </Route>
         <Route path="/reconcile">
-          <Reconcile />
+          <Issue />
+          {/* <Reconcile /> */}
         </Route>
         <Route path="/">
           <Home />
@@ -344,7 +345,6 @@ function CSVUpload() {
         saveLois(result.lois);
         console.log("Success:", result);
         setLois(result.lois);
-        history.push("/issue");
       })
       .catch((error) => {
         setLoading(false);

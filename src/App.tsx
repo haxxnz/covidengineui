@@ -226,7 +226,7 @@ function Issue() {
               {loi.location}
               <br /> {new Date(loi.start).toLocaleString("en-US")} -{" "}
               {new Date(loi.end).toLocaleString("en-US")}
-              <QRCode value={loiToQrValue(loi)} />,
+              {loi.gln ? <QRCode value={loiToQrValue(loi)} /> : null}
 
             </p>
 

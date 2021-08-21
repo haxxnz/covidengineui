@@ -10,8 +10,13 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import { Map } from "./map";
+import QRCode from 'qrcode.react';
+import { Base64 } from "js-base64";
 
-const API_URL = "https://api.covidengine.ml";
+const API_URL =
+  window.location.host === "localhost:3000"
+    ? "http://localhost:3001"
+    : "https://api.covidengine.ml";
 
 const sessionUserId = getSessionUserId();
 
@@ -63,6 +68,9 @@ export type LOI = {
   information: string;
   coordinates: ICoordinates;
   transactions: ImpoverishedTransaction[];
+  eventId: string
+  glnHash?: string
+  gln?: string
 };
 
 function saveLois(lois: LOI[]) {
@@ -170,6 +178,19 @@ function Loading() {
   );
 }
 
+function loiToQrValue(loi: LOI) {
+  const data = {
+    typ: 'entry',
+    gln: loi.gln,
+    opn: loi.event,
+    adr: loi.location,
+    ver: "c19:1",
+  }
+  const dataStr = JSON.stringify(data)
+  const b64 = Base64.encode(dataStr)
+  return `NZCOVIDTRACER:${b64}`
+}
+
 function Issue() {
   const lois = useMemo(() => getLois(), []);
 
@@ -192,7 +213,7 @@ function Issue() {
         <h3>Potential Exposure Events</h3>
         <Map lois={lois} />
         <div className="hr" />
-        {lois.map((loi: any) => (
+        {lois.map((loi) => (
           <>
             <p>
               <strong>
@@ -205,6 +226,8 @@ function Issue() {
               {loi.location}
               <br /> {new Date(loi.start).toLocaleString("en-US")} -{" "}
               {new Date(loi.end).toLocaleString("en-US")}
+              <QRCode value={loiToQrValue(loi)} />,
+
             </p>
 
             <div className="hr" />

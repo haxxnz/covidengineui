@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import "./App.css";
 
 const API_URL =
@@ -33,6 +39,38 @@ function createSessionUserId() {
 function getSessionUserId() {
   const tmp = localStorage.getItem("sessionUserId");
   return tmp ? tmp : createSessionUserId();
+}
+
+interface ImpoverishedTransaction {
+  _id: string;
+  merchant: {
+    name: string;
+  };
+  date: string;
+}
+interface ICoordinates {
+  lat: number;
+  lng: number;
+}
+
+export type LOI = {
+  id: string;
+  event: string;
+  location: string;
+  city: string;
+  start: Date;
+  end: Date;
+  information: string;
+  coordinates: ICoordinates;
+  transactions: ImpoverishedTransaction[];
+};
+
+function saveLois(lois: LOI[]) {
+  localStorage.setItem("lois", JSON.stringify(lois));
+}
+function getLois(): LOI[] | null {
+  const tmp = localStorage.getItem("lois");
+  return tmp ? JSON.parse(tmp ?? "null") : [];
 }
 
 console.log("sessionUserId", sessionUserId);
@@ -234,7 +272,17 @@ function Transaction() {
   );
 }
 
-function Reconcile(props:any) {
+function Reconcile(props: any) {
+  const [lois] = useState<LOI[] | null>(getLois());
+  if (lois === null) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
   return (
     <div className="App">
       <section className="container-small2">
@@ -242,12 +290,8 @@ function Reconcile(props:any) {
         <div className="hr" />
         <div className="grid-2">
           <div>
-            {/* <h2>Connect your Bank</h2> */}
             <aside>please stay at home and contact healthline</aside>
-            {/* <a href="https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=https://oauth.covidengine.ml/auth/akahu&scope=ENDURING_CONSENT">
-              <button className="primary">Connect your Bank</button>
-            </a> */}
-            <pre>{JSON.stringify(props)}</pre>
+            <pre>{JSON.stringify(lois, null, 2)}</pre>
           </div>
         </div>
       </section>
@@ -281,6 +325,7 @@ function CSVUpload() {
       .then((result) => {
         setLoading(false);
         setLois(result.lois);
+        saveLois(result.lois);
         console.log("Success:", result);
       })
       .catch((error) => {
@@ -293,8 +338,6 @@ function CSVUpload() {
       <Redirect
         to={{
           pathname: "/reconcile",
-          // search: "?utm=your+face",
-          state: { lois },
         }}
       />
     );

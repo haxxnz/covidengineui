@@ -84,7 +84,8 @@ function App() {
           <Transaction />
         </Route>
         <Route path="/csv">
-          <CSVUpload setLois={setLois} lois={lois}/>
+          {/* <CSVUpload setLois={setLois} lois={lois}/> */}
+          <CSVUpload />
         </Route>
         <Route path="/loading">
           <Loading />
@@ -301,14 +302,14 @@ function Reconcile(props: any) {
 }
 
 
-function CSVUpload({ setLois, lois }: { setLois: (loi: LOI[]) => void, lois: LOI[] }) {
+function CSVUpload() {
   const history = useHistory();
 
   
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [lois, setLois] = useState(false);
+  const [lois, setLois] = useState(false);
 
   const changeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);

@@ -70,7 +70,7 @@ function saveLois(lois: LOI[]) {
 }
 function getLois(): LOI[] | null {
   const tmp = localStorage.getItem("lois");
-  return tmp ? JSON.parse(tmp ?? "null") : [];
+  return JSON.parse(tmp ?? "null");
 }
 
 console.log("sessionUserId", sessionUserId);

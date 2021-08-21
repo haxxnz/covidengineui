@@ -7,6 +7,7 @@ export function Map({ lois }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
+  
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({

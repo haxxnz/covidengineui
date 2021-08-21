@@ -11,11 +11,12 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
+
         <Route path="/transaction">
           <Transaction />
+        </Route>
+        <Route path="/loading">
+          <Loading />
         </Route>
         <Route path="/">
           <Home />
@@ -32,11 +33,11 @@ function App() {
 function Home() {
   return <div className="App">
     <section className='container-small'>
-      <div></div>
+      <div className='image-mascot'><img className='image-mascot-item' src='./icons/lenny.svg' alt='mascot' /></div>
       <div>
 
-        <h1>Lenny can help protect you from COVID</h1>
-        <aside className='title-description'>Forgot to scan in? Lenny can automatically check if you’ve been exposed to COVID with your transactions.</aside>
+        <h1>Ashley can help protect you from COVID</h1>
+        <aside className='title-description'>Forgot to scan in? Ashley can automatically check if you’ve been exposed to COVID with your transactions.</aside>
         <div className='promo-container'>
           <img src='./icons/qr.svg' className='promo-icon' alt='lmao' />
           <p>Compare your bank transactions to COVID locations of interest</p>
@@ -57,9 +58,13 @@ function Home() {
   </div>
 }
 
-function About() {
+function Loading() {
   return <div className="App">
-    <section className='container-small'>aaa</section></div>;
+    <section className='container-small3'>
+   <div className='image-mascot'><img className='image-mascot-item' src='./icons/lenny.svg' alt='mascot' /></div>
+<h1 style={{textAlign: "center"}}>Loading...</h1>
+
+    </section></div>;
 }
 
 function Transaction() {
@@ -69,10 +74,10 @@ function Transaction() {
       <div className="hr" />
       <div className="grid-2">
         <div><h2>Connect your Bank</h2><aside>We’ll check your transactions to see if you’ve been exposed to COVID.<br /><br />We don’t store any of your bank data.</aside>
-          <Link to="/transaction"><button className="primary">Get Started</button></Link></div>
-        <div><h2>Upload a CSV</h2><aside>You can find this by logging into your bank on your laptop - it’s a spreadsheet you can download.
+          <Link to="/transaction"><button className="primary">Connect your Bank</button></Link></div>
+        <div><h2>Upload a CSV</h2><aside>You can find this by logging into your bank on your computer - it’s a spreadsheet you can download.
           <br /><br />We don’t store any of your bank data.</aside>
-          <Link to="/transaction"><button className="primary">Get Started</button></Link></div>
+          <Link to="/csv"><button className="primary">Upload CSV</button></Link></div>
       </div>
 
 

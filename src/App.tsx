@@ -1,11 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
+
   useLocation,
   useHistory,
+
+  Redirect,
+
 } from "react-router-dom";
 import "./App.css";
 import { Map } from "./map";
@@ -40,6 +44,38 @@ function getSessionUserId() {
   return tmp ? tmp : createSessionUserId();
 }
 
+interface ImpoverishedTransaction {
+  _id: string;
+  merchant: {
+    name: string;
+  };
+  date: string;
+}
+interface ICoordinates {
+  lat: number;
+  lng: number;
+}
+
+export type LOI = {
+  id: string;
+  event: string;
+  location: string;
+  city: string;
+  start: Date;
+  end: Date;
+  information: string;
+  coordinates: ICoordinates;
+  transactions: ImpoverishedTransaction[];
+};
+
+function saveLois(lois: LOI[]) {
+  localStorage.setItem("lois", JSON.stringify(lois));
+}
+function getLois(): LOI[] | null {
+  const tmp = localStorage.getItem("lois");
+  return tmp ? JSON.parse(tmp ?? "null") : [];
+}
+
 console.log("sessionUserId", sessionUserId);
 
 function App() {
@@ -61,6 +97,9 @@ function App() {
         </Route>
         <Route path="/clear">
           <Clear />
+        </Route>
+        <Route path="/reconcile">
+          <Reconcile />
         </Route>
         <Route path="/">
           <Home />
@@ -237,10 +276,42 @@ function Transaction() {
   );
 }
 
+function Reconcile(props: any) {
+  const lois = useMemo(() => getLois(), []);
+  if (lois === null) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
+  return (
+    <div className="App">
+      <section className="container-small2">
+        <h1>Please reconcile</h1>
+        <div className="hr" />
+        <div className="grid-2">
+          <div>
+            <aside>please stay at home and contact healthline</aside>
+            <pre>{JSON.stringify(lois, null, 2)}</pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
 function CSVUpload({ setLois }: { setLois: any }) {
   const history = useHistory();
+
+  
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [lois, setLois] = useState(false);
 
   const changeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -248,6 +319,7 @@ function CSVUpload({ setLois }: { setLois: any }) {
   };
 
   const handleSubmission = () => {
+    setLoading(true);
     const formData = new FormData();
 
     formData.append("csv", selectedFile);
@@ -259,14 +331,37 @@ function CSVUpload({ setLois }: { setLois: any }) {
     })
       .then((response) => response.json())
       .then((result) => {
+        setLoading(false);
+        setLois(result.lois);
+        saveLois(result.lois);
         console.log("Success:", result);
         setLois(result.lois);
         history.push("/issue");
       })
       .catch((error) => {
+        setLoading(false);
         console.error("Error:", error);
       });
   };
+  if (lois) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/reconcile",
+        }}
+      />
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="App">
+        <section className="container-small2">
+          <h1>Processing...</h1>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="App">

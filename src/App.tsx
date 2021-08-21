@@ -1,17 +1,20 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
+
+  useLocation,
+  useHistory,
+
   Redirect,
+
 } from "react-router-dom";
 import "./App.css";
+import { Map } from "./map";
 
-const API_URL =
-  window.location.host === "localhost:3000"
-    ? "http://localhost:3001"
-    : "https://api.covidengine.ml";
+const API_URL = "https://api.covidengine.ml";
 
 const sessionUserId = getSessionUserId();
 
@@ -76,6 +79,7 @@ function getLois(): LOI[] | null {
 console.log("sessionUserId", sessionUserId);
 
 function App() {
+  const [lois, setLois] = useState<LOI[]>([]);
   return (
     <Router>
       <Switch>
@@ -83,13 +87,13 @@ function App() {
           <Transaction />
         </Route>
         <Route path="/csv">
-          <CSVUpload />
+          <CSVUpload setLois={setLois} lois={lois}/>
         </Route>
         <Route path="/loading">
           <Loading />
         </Route>
         <Route path="/issue">
-          <Issue />
+          <Issue lois={lois} />
         </Route>
         <Route path="/clear">
           <Clear />
@@ -168,7 +172,7 @@ function Loading() {
   );
 }
 
-function Issue() {
+function Issue({ lois }: { lois: any }) {
   return (
     <div className="App">
       <section className="container-small3">
@@ -177,27 +181,27 @@ function Issue() {
           Please stay at home and contact healthline for a COVID Test
         </aside>
         <h3>Potential Exposure Events</h3>
-
+        <Map lois={lois} />
         <div className="hr" />
-        <p>
-          <strong>MCDonalds Grafton</strong>
-          <br />
-          60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021{" "}
-        </p>
+        {lois.map((loi: any) => (
+          <>
+            <p>
+              <strong>
+                {loi.event
+                  .split(" ")
+                  .slice(0, loi.event.split(" ").length - 1)
+                  .join(" ")}
+              </strong>
+              <br />
+              {loi.location}
+              <br /> {new Date(loi.start).toLocaleString("en-US")} -{" "}
+              {new Date(loi.end).toLocaleString("en-US")}
+            </p>
 
-        <div className="hr" />
-        <p>
-          <strong>MCDonalds Grafton</strong>
-          <br />
-          60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021{" "}
-        </p>
+            <div className="hr" />
+          </>
+        ))}
 
-        <div className="hr" />
-        <p>
-          <strong>MCDonalds Grafton</strong>
-          <br />
-          60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021{" "}
-        </p>
         <button style={{ margin: "1.5rem 0 0 0" }} className="primary">
           Send Data to Ministry of Health
         </button>
@@ -299,11 +303,15 @@ function Reconcile(props: any) {
   );
 }
 
-function CSVUpload() {
+
+function CSVUpload({ setLois, lois }: { setLois: (loi: LOI[]) => void, lois: LOI[] }) {
+  const history = useHistory();
+
+  
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [lois, setLois] = useState(false);
+  // const [lois, setLois] = useState(false);
 
   const changeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -327,6 +335,8 @@ function CSVUpload() {
         setLois(result.lois);
         saveLois(result.lois);
         console.log("Success:", result);
+        setLois(result.lois);
+        history.push("/issue");
       })
       .catch((error) => {
         setLoading(false);

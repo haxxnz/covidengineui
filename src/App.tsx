@@ -220,14 +220,6 @@ function Issue() {
         {lois.map((loi) => (
           <>
             <p>
-              <strong>
-                {loi.event
-                  .split(" ")
-                  .slice(0, loi.event.split(" ").length - 1)
-                  .join(" ")}
-              </strong>
-              <br />
-              {loi.location}
               <div
                 style={{
                   display: "flex",
@@ -235,8 +227,31 @@ function Issue() {
                   alignItems: "center",
                 }}
               >
-                {new Date(loi.start).toLocaleString("en-US")} -{" "}
-                {new Date(loi.end).toLocaleString("en-US")}
+                <div>
+                  <strong>
+                    {loi.event
+                      .split(" ")
+                      .slice(0, loi.event.split(" ").length - 1)
+                      .join(" ")}
+                  </strong>
+                  <br />
+                  {loi.location}
+                  <div>
+                  {new Date(loi.start).toLocaleDateString()} {new Date(loi.start).toLocaleTimeString()} -{" "}
+                  {new Date(loi.end).toLocaleDateString()} {new Date(loi.end).toLocaleTimeString()}
+                  </div>
+                  <div>
+                    <br />
+                    You've been here at:
+                    {loi.transactions.map((transaction) => {
+                      return (
+                        <div>
+                          <>{new Date(transaction.date).toLocaleDateString()}</>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
                 <div>
                   {loi.gln ? (
                     <QRCode value={loiToQrValue(loi)} />

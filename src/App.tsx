@@ -132,7 +132,7 @@ function Home() {
             <img src="./icons/search.svg" className="promo-icon" alt="lmao" />
 
             <p>
-              We only look at the last two weeks of transactions and we dont
+              We only look at the last two weeks of transactions and we don't
               store your data
             </p>
           </div>

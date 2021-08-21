@@ -46,9 +46,9 @@ function Home() {
           />
         </div>
         <div>
-          <h1>Ashley can help protect you from COVID</h1>
+          <h1>Lenny can help protect you from COVID</h1>
           <aside className="title-description">
-            Forgot to scan in? Ashley can automatically check if you’ve been
+            Forgot to scan in? Lenny can automatically check if you’ve been
             exposed to COVID with your transactions.
           </aside>
           <div className="promo-container">

@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  useLocation,
   useHistory,
   Redirect,
 

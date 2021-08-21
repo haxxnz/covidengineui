@@ -315,9 +315,7 @@ function CSVUpload() {
       .then((response) => response.json())
       .then((result) => {
         setLoading(false);
-        setLois(result.lois);
         saveLois(result.lois);
-        console.log("Success:", result);
         setLois(result.lois);
       })
       .catch((error) => {

@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
+
+const API_URL =
+  window.location.host === "localhost:3000"
+    ? "http://localhost:3001"
+    : "https://api.covidengine.ml";
 
 function App() {
   return (
@@ -8,6 +13,9 @@ function App() {
       <Switch>
         <Route path="/transaction">
           <Transaction />
+        </Route>
+        <Route path="/csv">
+          <CSVUpload />
         </Route>
         <Route path="/loading">
           <Loading />
@@ -187,6 +195,79 @@ function Transaction() {
               <button className="primary">Upload CSV</button>
             </Link>
           </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function CSVUpload() {
+  const [selectedFile, setSelectedFile] = useState<string>("");
+  const [isFilePicked, setIsFilePicked] = useState(false);
+
+  const changeHandler = (event: any) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
+
+  const handleSubmission = () => {
+    const formData = new FormData();
+
+    formData.append("csv", selectedFile);
+
+    fetch(`${API_URL}/uploadcsv`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  return (
+    <div className="App">
+      <section className="container-small2">
+        <h1>Upload a CSV</h1>
+        <div className="hr" />
+        <div className="grid-2">
+          {/* <input type="file"/> */}
+
+          <input type="file" name="file" onChange={changeHandler} />
+          <div>
+            <button onClick={handleSubmission} disabled={!isFilePicked}>
+              Submit
+            </button>
+          </div>
+          {/* <div>
+            <h2>Connect your Bank</h2>
+            <aside>
+              We’ll check your transactions to see if you’ve been exposed to
+              COVID.
+              <br />
+              <br />
+              We don’t store any of your bank data.
+            </aside>
+            <a href="https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=https://oauth.covidengine.ml/auth/akahu&scope=ENDURING_CONSENT">
+              <button className="primary">Connect your Bank</button>
+            </a>
+          </div>
+          <div>
+            <h2>Upload a CSV</h2>
+            <aside>
+              You can find this by logging into your bank on your computer -
+              it’s a spreadsheet you can download.
+              <br />
+              <br />
+              We don’t store any of your bank data.
+            </aside>
+            <Link to="/csv">
+              <button className="primary">Upload CSV</button>
+            </Link>
+          </div> */}
         </div>
       </section>
     </div>

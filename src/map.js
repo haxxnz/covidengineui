@@ -1,5 +1,5 @@
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoid3NlYWdhciIsImEiOiJja3NsY3JjbHowNjF4MnBwbmJvcDFscDRwIn0.ONanvuiNYY7KcoooHlspew";
@@ -7,7 +7,7 @@ export function Map({ lois }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
-  
+
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
@@ -18,7 +18,7 @@ export function Map({ lois }) {
     });
 
     for (const loi of lois) {
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([loi.coordinates.lat, loi.coordinates.lng])
         .setPopup(
           new mapboxgl.Popup().setHTML(

@@ -348,6 +348,11 @@ function CSVUpload() {
       <section className="container-small2">
         <h1>Upload a CSV</h1>
         <div className="hr" />
+        <aside>
+          Only ANZ and BNZ accounts are supported.
+          <br/>
+          <br/>
+        </aside>
         <div className="grid-2">
           <input type="file" name="file" onChange={changeHandler} />
           <div>

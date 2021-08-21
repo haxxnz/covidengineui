@@ -170,9 +170,9 @@ function Transaction() {
               <br />
               We don’t store any of your bank data.
             </aside>
-            <Link to="/transaction">
+            <a href="https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=https://oauth.covidengine.ml/auth/akahu&scope=ENDURING_CONSENT">
               <button className="primary">Connect your Bank</button>
-            </Link>
+            </a>
           </div>
           <div>
             <h2>Upload a CSV</h2>

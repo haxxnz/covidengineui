@@ -224,9 +224,12 @@ function Issue() {
               </strong>
               <br />
               {loi.location}
-              <br /> {new Date(loi.start).toLocaleString("en-US")} -{" "}
-              {new Date(loi.end).toLocaleString("en-US")}
-              {loi.gln ? <QRCode value={loiToQrValue(loi)} /> : null}
+              {/* <br />  */}
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: "center"}}>
+                {new Date(loi.start).toLocaleString("en-US")} -{" "}
+                {new Date(loi.end).toLocaleString("en-US")}
+                {loi.gln ? <QRCode value={loiToQrValue(loi)} /> : null}
+              </div>
 
             </p>
 

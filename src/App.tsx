@@ -247,6 +247,7 @@ function Issue() {
                       return (
                         <div>
                           <>{new Date(transaction.date).toLocaleDateString()}</>
+                          &nbsp;({transaction.merchant.name})
                         </div>
                       );
                     })}

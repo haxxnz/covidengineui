@@ -90,8 +90,9 @@ function Issue() {
 
       <div className="hr" />
       <p><strong>MCDonalds Grafton</strong><br/>60 Khyber Pass Road, Grafton - 6:30PM 17th August 2021  </p>
-     <button  style={{margin: "1.5rem 0 0 0"}} className="primary">Send Data to Ministry of health</button>
- <button style={{margin: "1rem 0 0 0"}} className="primary">Contact HealthLine</button>
+     <button  style={{margin: "1.5rem 0 0 0"}} className="primary">Send Data to Ministry of Health</button>
+      <button style={{ margin: "1rem 0 0 0" }} className="primary">Contact HealthLine</button>
+       <button style={{margin: "1rem 0 0 0"}} className="secondary">Back to Start</button>
     </section></div>;
 }
 
@@ -99,7 +100,7 @@ function Clear() {
   return <div className="App">
     <section className='container-small3'>
 <h1 style={{textAlign: "center"}}>All clear!</h1>
-
+   <aside  className='title-description'>No issues found with your transactions</aside>
     </section></div>;
 }
 

@@ -76,7 +76,7 @@ function getLois(): LOI[] | null {
 console.log("sessionUserId", sessionUserId);
 
 function App() {
-  const [lois, setLois] = useState<LOI[]>([]);
+  // const [lois, setLois] = useState<LOI[]>([]);
   return (
     <Router>
       <Switch>
@@ -84,14 +84,13 @@ function App() {
           <Transaction />
         </Route>
         <Route path="/csv">
-          {/* <CSVUpload setLois={setLois} lois={lois}/> */}
           <CSVUpload />
         </Route>
         <Route path="/loading">
           <Loading />
         </Route>
         <Route path="/issue">
-          <Issue lois={lois} />
+          <Issue />
         </Route>
         <Route path="/clear">
           <Clear />
@@ -170,7 +169,18 @@ function Loading() {
   );
 }
 
-function Issue({ lois }: { lois: any }) {
+function Issue() {
+  const lois = useMemo(() => getLois(), []);
+
+  if (lois === null) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
   return (
     <div className="App">
       <section className="container-small3">

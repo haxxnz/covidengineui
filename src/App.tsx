@@ -409,30 +409,6 @@ function AllQRCodes() {
     fetchExposureLocations();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="App">
-        <section className="container-small2">
-          <h1>Scan in to a location of interest</h1>
-          <div className="hr" />
-          <aside>Loading...</aside>
-        </section>
-      </div>
-    );
-  }
-  if (error) {
-    return (
-      <div className="App">
-        <section className="container-small2">
-          <h1>Scan in to a location of interest</h1>
-          <p></p>
-          <div className="hr" />
-          <aside>Error loading page</aside>
-        </section>
-      </div>
-    );
-  }
-
   return (
     <div className="App">
       <section className="container-small2">
@@ -441,7 +417,7 @@ function AllQRCodes() {
         <div className="hr" />
         <aside>
           <strong>
-            Have you been to a Location of interest, but forgot to scan in?{" "}
+            Have you been to a Location of Interest, but forgot to scan in?{" "}
           </strong>
           <div>
             No problem! You can scan it properly, including the Global Location
@@ -461,43 +437,88 @@ function AllQRCodes() {
           <br />
           <br />
         </aside>
-        <div className="grid-2">
-          {exposureLocations.map((el) => {
-            return (
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>
-                  <h2>{el.event}</h2>
-                  <div>{el.location}</div>
-                  <div>
-                    {new Date(el.start).toLocaleDateString()}{" "}
-                    {new Date(el.start).toLocaleTimeString()} -{" "}
-                    {new Date(el.end).toLocaleDateString()}{" "}
-                    {new Date(el.end).toLocaleTimeString()}
-                  </div>
-                </div>
 
-                {el.gln ? (
-                  <QRCode value={loiToQrValue(el)} />
-                ) : (
-                  <div
-                    style={{
-                      width: 128,
-                      height: 128,
-                      border: "1px solid black",
-                      display: "flex",
-                      textAlign: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    QR code not available
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        {error ? (
+          <aside>
+            <br />
+            Error Loading page
+          </aside>
+        ) : null}
+        {!error && loading ? (
+          <aside>
+            <br />
+            Loading...
+          </aside>
+        ) : null}
+        {!error && !loading ? (
+          <>
+            <Link to="/">
+              <button style={{ margin: "1rem 0 0 0" }} className="secondary">
+                Back to Start
+              </button>
+            </Link>
+            <br />
+            <br />
+            <br />
+            <div className="grid-2">
+              <ExposureLocationsQrCodes exposureLocations={exposureLocations} />
+            </div>
+            <br />
+            <br />
+            <Link to="/">
+              <button style={{ margin: "1rem 0 0 0" }} className="secondary">
+                Back to Start
+              </button>
+            </Link>
+          </>
+        ) : null}
       </section>
     </div>
+  );
+}
+
+function ExposureLocationsQrCodes({
+  exposureLocations,
+}: {
+  exposureLocations: ExposureLocation[];
+}) {
+  return (
+    <>
+      {exposureLocations.map((el) => {
+        return (
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ marginRight: "1rem" }}>
+              <h2>{el.event}</h2>
+              <div>{el.location}</div>
+              <div>
+                {new Date(el.start).toLocaleDateString()}{" "}
+                {new Date(el.start).toLocaleTimeString()} -{" "}
+                {new Date(el.end).toLocaleDateString()}{" "}
+                {new Date(el.end).toLocaleTimeString()}
+              </div>
+            </div>
+
+            {el.gln ? (
+              <QRCode value={loiToQrValue(el)} />
+            ) : (
+              <div
+                style={{
+                  width: 128,
+                  minWidth: 128,
+                  height: 128,
+                  border: "1px solid black",
+                  display: "flex",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
+                QR code not available
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </>
   );
 }
 

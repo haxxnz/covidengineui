@@ -10,6 +10,7 @@ function go () {
     window.location.href = url;
   }
 }
+
 export default function Transaction() {
   return (
     <div className="App">

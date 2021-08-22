@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -57,7 +57,16 @@ interface ICoordinates {
   lng: number;
 }
 
-export type LOI = {
+interface ExposureLocation {
+  id: string;
+  event: string;
+  location: string;
+  start: Date;
+  end: Date;
+  gln?: string;
+}
+
+export interface LOI extends ExposureLocation {
   id: string;
   event: string;
   location: string;
@@ -70,7 +79,7 @@ export type LOI = {
   eventId: string;
   glnHash?: string;
   gln?: string;
-};
+}
 
 function saveLois(lois: LOI[]) {
   localStorage.setItem("lois", JSON.stringify(lois));
@@ -105,6 +114,9 @@ function App() {
         <Route path="/reconcile">
           <Issue />
           {/* <Reconcile /> */}
+        </Route>
+        <Route path="/all-qr-codes">
+          <AllQRCodes />
         </Route>
         <Route path="/">
           <Home />
@@ -177,12 +189,12 @@ function Loading() {
   );
 }
 
-function loiToQrValue(loi: LOI) {
+function loiToQrValue(exposedLocation: ExposureLocation) {
   const data = {
     typ: "entry",
-    gln: loi.gln,
-    opn: loi.event,
-    adr: loi.location,
+    gln: exposedLocation.gln,
+    opn: exposedLocation.event,
+    adr: exposedLocation.location,
     ver: "c19:1",
   };
   const dataStr = JSON.stringify(data);
@@ -362,6 +374,104 @@ function Transaction() {
             Back to Start
           </button>
         </Link>
+      </section>
+    </div>
+  );
+}
+
+function AllQRCodes() {
+  const [exposureLocations, setExposureLocations] = useState<
+    ExposureLocation[]
+  >([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  async function fetchExposureLocations() {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/exposurelocations`);
+      const data = await res.json();
+      setExposureLocations(data.exposureLocations);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  }
+  useEffect(() => {
+    fetchExposureLocations();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="App">
+        <section className="container-small2">
+          <h1>Scan in after-the-fact to the locations of interest</h1>
+          <div className="hr" />
+          <aside>Loading...</aside>
+        </section>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="App">
+        <section className="container-small2">
+          <h1>Scan in after-the-fact to the locations of interest</h1>
+          <div className="hr" />
+          <aside>Error loading page</aside>
+        </section>
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      <section className="container-small2">
+        <h1>Scan in after-the-fact to the locations of interest</h1>
+        <div className="hr" />
+        <aside>
+          Know that you've been to a Location of Interest, but forgot to scan in? No problem!
+          <br />
+          You can scan it in properly, including the Global Location Number on this page! <br/>
+          This way, instead of adding a manual diary entry, you will actually get an exposure notification.
+          <br />
+          <br />
+        </aside>
+        <div className="grid-2">
+          {exposureLocations.map((el) => {
+            return (
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div>
+                  <h2>{el.event}</h2>
+                  <div>{el.location}</div>
+                  <div>
+                    {new Date(el.start).toLocaleDateString()}{" "}
+                    {new Date(el.start).toLocaleTimeString()} -{" "}
+                    {new Date(el.end).toLocaleDateString()}{" "}
+                    {new Date(el.end).toLocaleTimeString()}
+                  </div>
+                </div>
+
+                {el.gln ? (
+                  <QRCode value={loiToQrValue(el)} />
+                ) : (
+                  <div
+                    style={{
+                      width: 128,
+                      height: 128,
+                      border: "1px solid black",
+                      display: "flex",
+                      textAlign: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    QR code not available
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </section>
     </div>
   );

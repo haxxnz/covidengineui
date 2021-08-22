@@ -58,16 +58,8 @@ export interface LOI extends ExposureLocation {
 }
 
 export function getLois(): LOI[] | null {
-  const urlLoisEncoded = (new URL(document.location.href)).searchParams.get('loisEncoded');
-  if (urlLoisEncoded) {
-    const str = Base64.decode(urlLoisEncoded);
-    const lois = JSON.parse(str);
-    return lois;
-  }
-  else {
-    const tmp = localStorage.getItem("lois");
-    return JSON.parse(tmp ?? "null");
-  }
+  const tmp = localStorage.getItem("lois");
+  return JSON.parse(tmp ?? "null");
 }
 
 function App() {

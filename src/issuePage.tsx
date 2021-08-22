@@ -1,14 +1,45 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import {
   Redirect,
 } from "react-router-dom";
 import "./App.css";
 import { Map } from "./map";
 import QRCode from "qrcode.react";
-import { getLois, loiToQrValue } from './App';
+import { API_URL, getLois, LOI, loiToQrValue } from './App';
+import { getSessionUserId } from './csvUpload';
 
+const sessionUserId = getSessionUserId();
 export default function Issue() {
-  const lois = useMemo(() => getLois(), []);
+  const fromAkahu = new URL(document.location.href).searchParams.get(
+    "fromAkahu"
+  );
+  const [lois, setLois] = useState<null | undefined | LOI[]>(undefined);
+  useEffect(() => {
+    async function fetchLois() {
+      if (fromAkahu) {
+        const res = await fetch(
+          `${API_URL}/mylois?sessionUserId=${sessionUserId}`
+        );
+        const result = await res.json();
+        setLois(result.lois);
+      } else {
+        setLois(getLois());
+      }
+    }
+    fetchLois();
+  }, [fromAkahu]);
+
+  if (typeof lois === "undefined") {
+    return (
+      <div className="App">
+        <div className="grid-map-2">
+          <section className="container-small4">
+            <h1>Loading... </h1>
+          </section>
+        </div>
+      </div>
+    );
+  }
 
   if (lois === null) {
     return (

@@ -29,7 +29,7 @@ function createSessionUserId() {
   return randStr;
 }
 
-function getSessionUserId() {
+export function getSessionUserId() {
   const tmp = localStorage.getItem("sessionUserId");
   return tmp ? tmp : createSessionUserId();
 }

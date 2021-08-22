@@ -74,10 +74,10 @@ export default function Issue() {
           <h2 style={{ margin: "0 0 0.5rem 0" }}>
             {lois.length} Potential Exposure Events
           </h2>
-          <p>
+          {lois.length ? <p>
             Please review these exposure events. You can scan the QR codes to
             import missed scan-ins into your NZ Covid Tracer app
-          </p>
+          </p> : null}
           <div className="hr" />
           {lois.map((loi) => (
             <>

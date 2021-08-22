@@ -42,13 +42,15 @@ export function Map({ lois }) {
     >
       <div className="map-container">
         <div ref={mapContainer} className="map-map" />
-        <div className="hide-mobile">
+        <div className="hide-mobile grid-3">
           <button style={{ margin: "1rem 0 0 0" }} className="primary">
             Send Data to Ministry of Health
           </button>
-          <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
-            Contact HealthLine
-          </button>
+          <a href="tel:08003585453">
+            <button style={{ margin: "1rem 0 0 0" }} className="primary">
+              Contact HealthLine
+            </button>
+          </a>
         </div>
         <div
           style={{

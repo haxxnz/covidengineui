@@ -216,18 +216,20 @@ function Issue() {
                <div className="hide-desktop">
           <button style={{ margin: "1rem 0 0 0" }} className="primary">
             Send Data to Ministry of Health
-          </button>
+            </button>
+            <a href='tel:08003585453'>
           <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
             Contact HealthLine
-          </button>
+              </button>
+              </a>
         </div>
        
        
         <div className="hr" />
          <h2 style={{ margin: "0 0 0.5rem 0" }} >Potential Exposure Events</h2>
         <p>
-          Please review the exposure events and scan the QR codes to import the
-          missed scan-ins to the NZ Covid Tracer app
+          Please review these exposure events. You can scan the QR codes to import
+          missed scan-ins into your NZ Covid Tracer app
         </p>
         <div className="hr" />
         {lois.map((loi) => (

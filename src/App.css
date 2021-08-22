@@ -243,6 +243,12 @@ section.container-small4 {
   gap: 3rem;
 }
 
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .image-mascot-item {
   margin: 4rem auto;
   max-width: 320px;
@@ -285,4 +291,26 @@ section.container-small4 {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+}
+
+/* 
+hacky shit for mapbox */
+
+.mapboxgl-popup-close-button {
+  width: initial;
+  height: 32px;
+  width: 32px;
+  border-radius: 12px;
+}
+
+.mapboxgl-popup-content {
+  border-radius: 12px !important;
+  padding: 16px !important;
+  max-height: 200px;
+  overflow: scroll;
+  font-family: "DM Sans", sans-serif;
+}
+
+.mapboxgl-popup-content h3:first-of-type {
+  margin-top: 0;
 }

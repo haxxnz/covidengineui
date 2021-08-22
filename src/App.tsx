@@ -166,8 +166,8 @@ function Home() {
           <Link to="/transaction">
             <button className="primary">Get Started</button>
           </Link>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <Link to="/all-qr-codes">
             <button className="secondary">All QR Codes</button>
           </Link>
@@ -223,55 +223,51 @@ function Issue() {
     <div className="App">
       <div className="grid-map-2">
         <Map lois={lois} />
-      <section className="container-small4">
-    
-        <h1>You might be exposed to COVID </h1>
-        <aside className="title-description">
-          Please stay at home and contact healthline for a COVID Test
-        </aside>
-               <div className="hide-desktop">
-          <button style={{ margin: "1rem 0 0 0" }} className="primary">
-            Send Data to Ministry of Health
+        <section className="container-small4">
+          <h1>You might be exposed to COVID </h1>
+          <aside className="title-description">
+            Please stay at home and contact healthline for a COVID Test
+          </aside>
+          <div className="hide-desktop">
+            <button style={{ margin: "1rem 0 0 0" }} className="primary">
+              Send Data to Ministry of Health
             </button>
-            <a href='tel:08003585453'>
-          <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
-            Contact HealthLine
+            <a href="tel:08003585453">
+              <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
+                Contact HealthLine
               </button>
-              </a>
-        </div>
-       
-       
-        <div className="hr" />
-         <h2 style={{ margin: "0 0 0.5rem 0" }} >Potential Exposure Events</h2>
-        <p>
-          Please review these exposure events. You can scan the QR codes to import
-          missed scan-ins into your NZ Covid Tracer app
-        </p>
-        <div className="hr" />
-        {lois.map((loi) => (
-          <>
-            <p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <div>
-               
-                  <strong>
-                    {loi.event
-                      .split(" ")
-                      .slice(0, loi.event.split(" ").length - 1)
-                      .join(" ")}
-                  </strong>
-                     <p style={{color: "#444"}}>
-                
-                    {loi.location}
+            </a>
+          </div>
 
+          <div className="hr" />
+          <h2 style={{ margin: "0 0 0.5rem 0" }}>
+            {lois.length} Potential Exposure Events
+          </h2>
+          <p>
+            Please review these exposure events. You can scan the QR codes to
+            import missed scan-ins into your NZ Covid Tracer app
+          </p>
+          <div className="hr" />
+          {lois.map((loi) => (
+            <>
+              <p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <strong>
+                      {loi.event
+                        .split(" ")
+                        .slice(0, loi.event.split(" ").length - 1)
+                        .join(" ")}
+                    </strong>
+                    <p style={{ color: "#444" }}>
+                      {loi.location}
 
-                 
                       <div>
                         {new Date(loi.start).toLocaleDateString()}{" "}
                         {new Date(loi.start).toLocaleTimeString()} -{" "}
@@ -444,18 +440,26 @@ function AllQRCodes() {
 
         <div className="hr" />
         <aside>
-          <strong>Have you been to a Location of interest, but forgot to scan in? </strong>
-          <div>No problem! You can scan it properly, including the Global Location Number, on this page! This way, instead of adding a manual diary entry, you will actually get an exposure notification.
+          <strong>
+            Have you been to a Location of interest, but forgot to scan in?{" "}
+          </strong>
+          <div>
+            No problem! You can scan it properly, including the Global Location
+            Number, on this page! This way, instead of adding a manual diary
+            entry, you will actually get an exposure notification.
           </div>
           <br />
         </aside>
 
         <aside>
           <strong>Why some QR codes are not available?</strong>
-          <div>Some <i>Locations of Interest</i> have not been published as <i>Exposure Event</i> locations, so we can't match Global Location Numbers to them.</div>
+          <div>
+            Some <i>Locations of Interest</i> have not been published as{" "}
+            <i>Exposure Event</i> locations, so we can't match Global Location
+            Numbers to them.
+          </div>
           <br />
           <br />
-
         </aside>
         <div className="grid-2">
           {exposureLocations.map((el) => {

@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(-45deg, #FAD6CB, #F8C5D8, #BDE4F2, #BDF2E6);
+  background: linear-gradient(-45deg, #fad6cb, #f8c5d8, #bde4f2, #bdf2e6);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -29,7 +29,7 @@ ul {
 }
 
 li {
-  padding-bottom: 0.25rem
+  padding-bottom: 0.25rem;
 }
 
 .hr {
@@ -263,16 +263,16 @@ section.container-small4 {
 
 @media screen and (min-width: 768px) {
   .hide-desktop {
-    display: none
+    display: none;
   }
 }
 
 @media screen and (max-width: 768px) {
   .hide-mobile {
-    display: none
+    display: none;
   }
   .hide-desktop {
-    display: block
+    display: block;
   }
   .grid-map-2 {
     grid-template-columns: 1fr;

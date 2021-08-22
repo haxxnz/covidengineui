@@ -55,11 +55,10 @@ export default function Issue() {
       <div className="grid-map-2">
         <Map lois={lois} />
         <section className="container-small4">
-          <h1>You might be exposed to COVID </h1>
-          <aside className="title-description">
-            Please stay at home and contact healthline for a COVID Test
-          </aside>
+          {lois.length ? <h1>You might be exposed to COVID </h1> : <h1>All clear</h1>}
+          {lois.length ? <aside className="title-description">Please stay at home and contact healthline for a COVID Test</aside> : null}
           <div className="hide-desktop">
+            {lois.length ? <>
             <button style={{ margin: "1rem 0 0 0" }} className="primary" onClick={() => alert('Please scan the QR codes, set the dates you\'ve been at those locations, go to My data -> Share my digital diary')}>
               Send Data to Ministry of Health
             </button>
@@ -68,6 +67,7 @@ export default function Issue() {
                 Contact HealthLine
               </button>
             </a>
+            </> : null}
           </div>
 
           <div className="hr" />

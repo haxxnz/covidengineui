@@ -435,18 +435,15 @@ function AllQRCodes() {
             Numbers to them.
           </div>
           <br />
-          <br />
         </aside>
 
         {error ? (
           <aside>
-            <br />
             Error Loading page
           </aside>
         ) : null}
         {!error && loading ? (
           <aside>
-            <br />
             Loading...
           </aside>
         ) : null}

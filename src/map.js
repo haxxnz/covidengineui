@@ -61,7 +61,7 @@ export function Map({ lois }) {
             top: 0,
             left: 0,
             margin: "12px",
-            borderRadius: "4px",
+            borderRadius: "24px",
           }}
         >
           {lois.length} Locations of interest

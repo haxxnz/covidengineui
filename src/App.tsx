@@ -204,102 +204,102 @@ function Issue() {
   }
   return (
     <div className="App">
-          <div className='grid-map-2'>
+      <div className="grid-map-2">
         <Map lois={lois} />
-        
-      <section className="container-small4">
-    
-        <h1>You might be exposed to COVID </h1>
-        <aside className="title-description">
-          Please stay at home and contact healthline for a COVID Test
-        </aside>
-               <div className="hide-desktop">
-          <button style={{ margin: "1rem 0 0 0" }} className="primary">
-            Send Data to Ministry of Health
-          </button>
-          <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
-            Contact HealthLine
-          </button>
-        </div>
-       
-       
-        <div className="hr" />
-         <h2 style={{ margin: "0 0 0.5rem 0" }} >Potential Exposure Events</h2>
-        <p>
-          Please review the exposure events and scan the QR codes to import the
-          missed scan-ins to the NZ Covid Tracer app
-        </p>
-        <div className="hr" />
-        {lois.map((loi) => (
-          <>
-            <p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <div>
-               
-                  <strong>
-                    {loi.event
-                      .split(" ")
-                      .slice(0, loi.event.split(" ").length - 1)
-                      .join(" ")}
-                  </strong>
-                     <p style={{color: "#444"}}>
-                
-                    {loi.location}
-                  
+
+        <section className="container-small4">
+          <h1>You might be exposed to COVID </h1>
+          <aside className="title-description">
+            Please stay at home and contact healthline for a COVID Test
+          </aside>
+          <div className="hide-desktop">
+            <button style={{ margin: "1rem 0 0 0" }} className="primary">
+              Send Data to Ministry of Health
+            </button>
+            <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
+              Contact HealthLine
+            </button>
+          </div>
+
+          <div className="hr" />
+          <h2 style={{ margin: "0 0 0.5rem 0" }}>Potential Exposure Events</h2>
+          <p>
+            Please review the exposure events and scan the QR codes to import
+            the missed scan-ins to the NZ Covid Tracer app
+          </p>
+          <div className="hr" />
+          {lois.map((loi) => (
+            <>
+              <p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
                   <div>
-                  {new Date(loi.start).toLocaleDateString()} {new Date(loi.start).toLocaleTimeString()} -{" "}
-                  {new Date(loi.end).toLocaleDateString()} {new Date(loi.end).toLocaleTimeString()}
-                    </div>
-                      </p>
-                  <div>
-                    <br />
-                    You might have been here at:
-                  <ul>
-                    {loi.transactions.map((transaction) => {
-                      return (
-                        <li>
-                          <>{new Date(transaction.date).toLocaleDateString()}</>
-                          &nbsp;({transaction.merchant.name})
-                        </li>
-                      );
-                    })}
+                    <strong>
+                      {loi.event
+                        .split(" ")
+                        .slice(0, loi.event.split(" ").length - 1)
+                        .join(" ")}
+                    </strong>
+                    <p style={{ color: "#444" }}>
+                      {loi.location}
+
+                      <div>
+                        {new Date(loi.start).toLocaleDateString()}{" "}
+                        {new Date(loi.start).toLocaleTimeString()} -{" "}
+                        {new Date(loi.end).toLocaleDateString()}{" "}
+                        {new Date(loi.end).toLocaleTimeString()}
+                      </div>
+                    </p>
+                    <div>
+                      <br />
+                      You might have been here at:
+                      <ul>
+                        {loi.transactions.map((transaction) => {
+                          return (
+                            <li>
+                              <>
+                                {new Date(
+                                  transaction.date
+                                ).toLocaleDateString()}
+                              </>
+                              &nbsp;({transaction.merchant.name})
+                            </li>
+                          );
+                        })}
                       </ul>
+                    </div>
+                  </div>
+                  <div>
+                    {loi.gln ? (
+                      <QRCode value={loiToQrValue(loi)} />
+                    ) : (
+                      <div
+                        style={{
+                          width: 128,
+                          height: 128,
+                          border: "1px solid black",
+                          display: "flex",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        QR code not available
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div>
-                  {loi.gln ? (
-                    <QRCode value={loiToQrValue(loi)} />
-                  ) : (
-                    <div
-                      style={{
-                        width: 128,
-                        height: 128,
-                        border: "1px solid black",
-                        display: "flex",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      QR code not available
-                    </div>
-                  )}
-                </div>
-              </div>
-            </p>
+              </p>
 
-            <div className="hr" />
-          </>
-        ))}
-
-
+              <div className="hr" />
+            </>
+          ))}
         </section>
-        </div>
+      </div>
     </div>
   );
 }
@@ -357,7 +357,7 @@ function Transaction() {
             </Link>
           </div>
         </div>
-         <Link to="/">
+        <Link to="/">
           <button style={{ margin: "1rem 0 0 0" }} className="secondary">
             Back to Start
           </button>
@@ -432,16 +432,20 @@ function CSVUpload() {
           <br />
           <br />
         </aside>
-       
-          <label className='upload-primary'><p>Upload CSV</p>
-            <input type="file" name="file" onChange={changeHandler} />
-            </label>
-          <div>
-            <button className='primary' onClick={handleSubmission} disabled={!isFilePicked}>
-              Submit
-            </button>
-          </div>
-       
+
+        <label className="upload-primary">
+          <p>Upload CSV</p>
+          <input type="file" name="file" onChange={changeHandler} />
+        </label>
+        <div>
+          <button
+            className="primary"
+            onClick={handleSubmission}
+            disabled={!isFilePicked}
+          >
+            Submit
+          </button>
+        </div>
       </section>
     </div>
   );

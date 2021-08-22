@@ -222,7 +222,7 @@ function Issue() {
           </div>
 
           <div className="hr" />
-          <h2 style={{ margin: "0 0 0.5rem 0" }}>Potential Exposure Events</h2>
+          <h2 style={{ margin: "0 0 0.5rem 0" }}>{lois.length} Potential Exposure Events</h2>
           <p>
             Please review the exposure events and scan the QR codes to import
             the missed scan-ins to the NZ Covid Tracer app

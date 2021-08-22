@@ -7,7 +7,6 @@ export function Map({ lois }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
-
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
@@ -18,7 +17,7 @@ export function Map({ lois }) {
     });
 
     for (const loi of lois) {
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({ color: "#b40219" })
         .setLngLat([loi.coordinates.lat, loi.coordinates.lng])
         .setPopup(
           new mapboxgl.Popup().setHTML(

@@ -68,13 +68,15 @@ function App() {
     <Router>
       <Switch>
         <Route path="/transaction">
-          <Transaction />
+          <Suspense fallback={<Loading />}>
+            <Transaction />
+          </Suspense>
         </Route>
+
         <Route path="/csv">
           <Suspense fallback={<Loading />}>
             <CSVUpload />
           </Suspense>
-          <CSVUpload />
         </Route>
         <Route path="/loading">
           <Loading />

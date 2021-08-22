@@ -358,6 +358,8 @@ function Clear() {
 }
 
 function Transaction() {
+  const redirect_uri = `https://oauth.covidengine.ml/auth/akahu?sessionUserId=${sessionUserId}`
+  const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT`
   return (
     <div className="App">
       <section className="container-small2">
@@ -373,7 +375,7 @@ function Transaction() {
               <br />
               We don’t store any of your bank data.
             </aside>
-            <a href="https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=https://oauth.covidengine.ml/auth/akahu&scope=ENDURING_CONSENT">
+            <a href={url}>
               <button className="primary">Connect your Bank</button>
             </a>
           </div>

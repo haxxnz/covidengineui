@@ -437,16 +437,8 @@ function AllQRCodes() {
           <br />
         </aside>
 
-        {error ? (
-          <aside>
-            Error Loading page
-          </aside>
-        ) : null}
-        {!error && loading ? (
-          <aside>
-            Loading...
-          </aside>
-        ) : null}
+        {error ? <aside>Error Loading page</aside> : null}
+        {!error && loading ? <aside>Loading...</aside> : null}
         {!error && !loading ? (
           <>
             <Link to="/">

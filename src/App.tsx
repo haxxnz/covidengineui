@@ -246,7 +246,7 @@ function Issue() {
                       .slice(0, loi.event.split(" ").length - 1)
                       .join(" ")}
                   </strong>
-                     <p style={{color: "#666"}}>
+                     <p style={{color: "#444"}}>
                 
                     {loi.location}
                   

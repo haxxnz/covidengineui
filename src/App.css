@@ -28,7 +28,9 @@ ul {
   margin-top: 0.5rem;
 }
 
-li {padding-bottom: 0.25rem}
+li {
+  padding-bottom: 0.25rem
+}
 
 .hr {
   height: 2px;
@@ -46,7 +48,7 @@ aside {
 }
 
 button {
-  border-radius: 12px;
+  border-radius: 8px;
   height: 4rem;
   border: 2px solid #000;
   font-weight: 600;
@@ -264,9 +266,8 @@ section.container-small4 {
   .image-mascot-item {
     height: 15vh;
   }
-}
-
-.grid-2 {
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }

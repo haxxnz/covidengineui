@@ -1,10 +1,8 @@
-import {useEffect, useState } from "react";
-import {
-  Link,
-} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./App.css";
 import QRCode from "qrcode.react";
-import { API_URL, ExposureLocation, loiToQrValue } from './App';
+import { API_URL, ExposureLocation, loiToQrValue } from "./App";
 
 export default function AllQRCodes() {
   const [exposureLocations, setExposureLocations] = useState<

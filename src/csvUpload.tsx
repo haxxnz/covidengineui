@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 import {
-  Redirect,
-} from "react-router-dom";
-import { API_URL, ExposureLocation, ICoordinates, ImpoverishedTransaction } from './App';
+  API_URL,
+  ExposureLocation,
+  ICoordinates,
+  ImpoverishedTransaction,
+} from "./App";
 import "./App.css";
 
 const sessionUserId = getSessionUserId();
@@ -15,13 +18,13 @@ function createSessionUserId() {
     // 256 bit of entropy
     return btoa(
       randNum() +
-      randNum() +
-      randNum() +
-      randNum() +
-      randNum() +
-      randNum() +
-      randNum() +
-      randNum()
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum() +
+        randNum()
     );
   }
   const randStr = getRandStr();
@@ -35,7 +38,6 @@ export function getSessionUserId() {
 }
 
 export default function CSVUpload() {
-
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -117,7 +119,6 @@ export default function CSVUpload() {
   );
 }
 
-
 export interface LOI extends ExposureLocation {
   id: string;
   event: string;
@@ -132,7 +133,6 @@ export interface LOI extends ExposureLocation {
   glnHash?: string;
   gln?: string;
 }
-
 
 function saveLois(lois: LOI[]) {
   localStorage.setItem("lois", JSON.stringify(lois));

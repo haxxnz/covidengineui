@@ -1,14 +1,12 @@
-import {
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./App.css";
-import { getSessionUserId } from './csvUpload';
+import { getSessionUserId } from "./csvUpload";
 
 const sessionUserId = getSessionUserId();
 
 export default function Transaction() {
-  const redirect_uri = 'https://oauth.covidengine.ml/auth/akahu'
-  const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT&state=${sessionUserId}`
+  const redirect_uri = "https://oauth.covidengine.ml/auth/akahu";
+  const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT&state=${sessionUserId}`;
   return (
     <div className="App">
       <section className="container-small2">

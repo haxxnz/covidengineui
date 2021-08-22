@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  Redirect,
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./App.css";
 import { Map } from "./map";
 import QRCode from "qrcode.react";
-import { API_URL, getLois, LOI, loiToQrValue } from './App';
-import { getSessionUserId } from './csvUpload';
-import {
-  Link,
-} from "react-router-dom";
+import { API_URL, getLois, LOI, loiToQrValue } from "./App";
+import { getSessionUserId } from "./csvUpload";
+import { Link } from "react-router-dom";
 
 const sessionUserId = getSessionUserId();
 export default function Issue() {
@@ -58,30 +54,52 @@ export default function Issue() {
       <div className="grid-map-2">
         <Map lois={lois} />
         <section className="container-small4">
-          {lois.length ? <h1>You might be exposed to COVID </h1> : <h1>All clear</h1>}
-          {lois.length ? <aside className="title-description">Please stay at home and contact healthline for a COVID Test</aside> : null}
+          {lois.length ? (
+            <h1>You might be exposed to COVID </h1>
+          ) : (
+            <h1>All clear</h1>
+          )}
+          {lois.length ? (
+            <aside className="title-description">
+              Please stay at home and contact healthline for a COVID Test
+            </aside>
+          ) : null}
           <div className="hide-desktop">
-            {lois.length ? <>
-            <button style={{ margin: "1rem 0 0 0" }} className="primary" onClick={() => alert('Please scan the QR codes, set the dates you\'ve been at those locations, go to My data -> Share my digital diary')}>
-              Send Data to Ministry of Health
-            </button>
-            <a href="tel:08003585453">
-              <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
-                Contact HealthLine
-              </button>
-            </a>
-            </> : null}
-
+            {lois.length ? (
+              <>
+                <button
+                  style={{ margin: "1rem 0 0 0" }}
+                  className="primary"
+                  onClick={() =>
+                    alert(
+                      "Please scan the QR codes, set the dates you've been at those locations, go to My data -> Share my digital diary"
+                    )
+                  }
+                >
+                  Send Data to Ministry of Health
+                </button>
+                <a href="tel:08003585453">
+                  <button
+                    style={{ margin: "0.5rem 0 0 0" }}
+                    className="primary"
+                  >
+                    Contact HealthLine
+                  </button>
+                </a>
+              </>
+            ) : null}
           </div>
 
           <div className="hr" />
           <h2 style={{ margin: "0 0 0.5rem 0" }}>
             {lois.length} Potential Exposure Events
           </h2>
-          {lois.length ? <p>
-            Please review these exposure events. You can scan the QR codes to
-            import missed scan-ins into your NZ Covid Tracer app
-          </p> : null}
+          {lois.length ? (
+            <p>
+              Please review these exposure events. You can scan the QR codes to
+              import missed scan-ins into your NZ Covid Tracer app
+            </p>
+          ) : null}
           <div className="hr" />
           {lois.map((loi) => (
             <>
@@ -164,10 +182,8 @@ export default function Issue() {
               Back to Start
             </button>
           </Link>
-
         </section>
       </div>
     </div>
   );
 }
-

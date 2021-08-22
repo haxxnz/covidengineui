@@ -166,6 +166,11 @@ function Home() {
           <Link to="/transaction">
             <button className="primary">Get Started</button>
           </Link>
+          <br/>
+          <br/>
+          <Link to="/all-qr-codes">
+            <button className="secondary">All QR Codes</button>
+          </Link>
         </div>
       </section>
     </div>

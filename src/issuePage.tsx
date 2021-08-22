@@ -60,7 +60,7 @@ export default function Issue() {
             Please stay at home and contact healthline for a COVID Test
           </aside>
           <div className="hide-desktop">
-            <button style={{ margin: "1rem 0 0 0" }} className="primary">
+            <button style={{ margin: "1rem 0 0 0" }} className="primary" onClick={() => alert('Please scan the QR codes, set the dates you\'ve been at those locations, go to My data -> Share my digital diary')}>
               Send Data to Ministry of Health
             </button>
             <a href="tel:08003585453">

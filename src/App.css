@@ -1,7 +1,6 @@
 .App {
   min-height: 100vh;
   display: grid;
-  margin: 0 2rem;
 }
 
 body {
@@ -16,7 +15,8 @@ h1 {
 }
 
 h2 {
-  font-size: 2.25rem;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 p {
@@ -28,6 +28,10 @@ p {
   border-radius: 12px;
   background-color: lightgray;
   margin: 1.5rem 0;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 aside {
@@ -44,16 +48,54 @@ button {
   transition: all 0.3s;
 }
 
+.upload-primary {
+  border-radius: 12px;
+  height: 4rem;
+  border: 2px solid #000;
+  font-weight: 600;
+  font-size: 1.2rem;
+  width: 100%;
+  transition: all 0.15s;
+  display: grid;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.upload-primary:hover { 
+color: white;
+background-color: black;
+}
+
+.upload-primary p {
+  justify-self: center;
+  align-self: center;
+}
+
 button.primary {
   background-color: #000;
   color: #fff;
+}
+
+button.secondary {
+  background-color: lightgray;
+  border-color: lightgray;
+  color: black;
 }
 
 button.primary:hover {
   color: black;
   background-color: darkgray;
   border-color: darkgray;
-  transform: scale(1.05)
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: lightgray !important;
+  color: #555 !important;
+  cursor: not-allowed !important;
+  transform: initial !important;
 }
 
 @keyframes gradient {
@@ -124,11 +166,39 @@ section.container-small3 {
   width: 100%;
   max-width: 720px;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
-  margin: 0 auto;
+  margin: 1.5rem auto;
   padding: 1.5rem;
   box-sizing: border-box;
   justify-self: center;
   align-self: center;
+}
+
+section.container-small4 {
+  background-color: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 1440px;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  box-sizing: border-box;
+  justify-self: center;
+  align-self: center;
+}
+
+.grid-map-2 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1rem;
+  padding: 1.5rem;
+  margin: 0 auto;
+  max-width: 1600px;
+}
+
+.map-map {
+  height: 60vh;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0px 4px 24px rgb(0 0 0 / 12%);
 }
 
 .promo-container {
@@ -170,4 +240,25 @@ section.container-small3 {
 
 .grid-2 button {
   margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .grid-map-2 {
+    grid-template-columns: 1fr;
+  }
+  .map-map {
+    height: 40vh;
+  }
+  section.container-small {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .image-mascot-item {
+    height: 15vh;
+  }
+}
+
+.grid-2 {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }

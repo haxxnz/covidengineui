@@ -85,8 +85,16 @@ function saveLois(lois: LOI[]) {
   localStorage.setItem("lois", JSON.stringify(lois));
 }
 function getLois(): LOI[] | null {
-  const tmp = localStorage.getItem("lois");
-  return JSON.parse(tmp ?? "null");
+  const urlLoisEncoded = (new URL(document.location.href)).searchParams.get('loisEncoded')
+  if (urlLoisEncoded) {
+    const str = Base64.decode(urlLoisEncoded)
+    const lois = JSON.parse(str)
+    return lois
+  }
+  else {
+    const tmp = localStorage.getItem("lois");
+    return JSON.parse(tmp ?? "null");
+  }
 }
 
 console.log("sessionUserId", sessionUserId);

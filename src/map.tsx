@@ -40,6 +40,8 @@ export function Map({ lois }: any) {
     <div
       style={{
         borderRadius: "24px",
+        position: "sticky",
+        top: "1.5rem",
       }}
     >
       <div className="map-container">

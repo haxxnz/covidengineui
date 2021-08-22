@@ -3,10 +3,14 @@ import "./App.css";
 import { getSessionUserId } from "./csvUpload";
 
 const sessionUserId = getSessionUserId();
-
+function go () {
+  if (prompt("Akahu integration is currently in private beta. Please put in a password") === "KQTPlpalH9") {
+    const redirect_uri = "https://oauth.covidengine.ml/auth/akahu";
+    const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT&state=${sessionUserId}`;
+    window.location.href = url;
+  }
+}
 export default function Transaction() {
-  const redirect_uri = "https://oauth.covidengine.ml/auth/akahu";
-  const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT&state=${sessionUserId}`;
   return (
     <div className="App">
       <section className="container-small2">
@@ -22,9 +26,7 @@ export default function Transaction() {
               <br />
               We don’t store any of your bank data.
             </aside>
-            <a href={url}>
-              <button className="primary">Connect your Bank</button>
-            </a>
+            <button className="primary" onClick={go}>Connect your Bank</button>
           </div>
           <div>
             <h2>Upload a CSV</h2>

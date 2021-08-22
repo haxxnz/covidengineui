@@ -204,9 +204,8 @@ function Issue() {
   }
   return (
     <div className="App">
-          <div className='grid-map-2'>
+      <div className="grid-map-2">
         <Map lois={lois} />
-        
       <section className="container-small4">
     
         <h1>You might be exposed to COVID </h1>
@@ -253,55 +252,61 @@ function Issue() {
                      <p style={{color: "#444"}}>
                 
                     {loi.location}
-                  
-                  <div>
-                  {new Date(loi.start).toLocaleDateString()} {new Date(loi.start).toLocaleTimeString()} -{" "}
-                  {new Date(loi.end).toLocaleDateString()} {new Date(loi.end).toLocaleTimeString()}
-                    </div>
-                      </p>
-                  <div>
-                    <br />
-                    You might have been here at:
-                  <ul>
-                    {loi.transactions.map((transaction) => {
-                      return (
-                        <li>
-                          <>{new Date(transaction.date).toLocaleDateString()}</>
-                          &nbsp;({transaction.merchant.name})
-                        </li>
-                      );
-                    })}
+
+
+                 
+                      <div>
+                        {new Date(loi.start).toLocaleDateString()}{" "}
+                        {new Date(loi.start).toLocaleTimeString()} -{" "}
+                        {new Date(loi.end).toLocaleDateString()}{" "}
+                        {new Date(loi.end).toLocaleTimeString()}
+                      </div>
+                    </p>
+                    <div>
+                      <br />
+                      You might have been here at:
+                      <ul>
+                        {loi.transactions.map((transaction) => {
+                          return (
+                            <li>
+                              <>
+                                {new Date(
+                                  transaction.date
+                                ).toLocaleDateString()}
+                              </>
+                              &nbsp;({transaction.merchant.name})
+                            </li>
+                          );
+                        })}
                       </ul>
+                    </div>
+                  </div>
+                  <div>
+                    {loi.gln ? (
+                      <QRCode value={loiToQrValue(loi)} />
+                    ) : (
+                      <div
+                        style={{
+                          width: 128,
+                          height: 128,
+                          border: "1px solid black",
+                          display: "flex",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        QR code not available
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div>
-                  {loi.gln ? (
-                    <QRCode value={loiToQrValue(loi)} />
-                  ) : (
-                    <div
-                      style={{
-                        width: 128,
-                        height: 128,
-                        border: "1px solid black",
-                        display: "flex",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      QR code not available
-                    </div>
-                  )}
-                </div>
-              </div>
-            </p>
+              </p>
 
-            <div className="hr" />
-          </>
-        ))}
-
-
+              <div className="hr" />
+            </>
+          ))}
         </section>
-        </div>
+      </div>
     </div>
   );
 }
@@ -359,7 +364,7 @@ function Transaction() {
             </Link>
           </div>
         </div>
-         <Link to="/">
+        <Link to="/">
           <button style={{ margin: "1rem 0 0 0" }} className="secondary">
             Back to Start
           </button>
@@ -434,16 +439,20 @@ function CSVUpload() {
           <br />
           <br />
         </aside>
-       
-          <label className='upload-primary'><p>Upload CSV</p>
-            <input type="file" name="file" onChange={changeHandler} />
-            </label>
-          <div>
-            <button className='primary' onClick={handleSubmission} disabled={!isFilePicked}>
-              Submit
-            </button>
-          </div>
-       
+
+        <label className="upload-primary">
+          <p>Upload CSV</p>
+          <input type="file" name="file" onChange={changeHandler} />
+        </label>
+        <div>
+          <button
+            className="primary"
+            onClick={handleSubmission}
+            disabled={!isFilePicked}
+          >
+            Submit
+          </button>
+        </div>
       </section>
     </div>
   );

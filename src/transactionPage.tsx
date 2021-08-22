@@ -34,9 +34,11 @@ export default function Transaction() {
             <aside>
               You can find this by logging into your bank on your computer -
               it’s a spreadsheet you can download.
+              <br/>
+              
+
               <br />
-              <br />
-              We don’t store any of your bank data.
+              We don’t store any of your bank data. <a href="https://raw.githubusercontent.com/CovidEngine/covidengineui/main/demo.csv">Demo data link</a>
             </aside>
             <Link to="/csv">
               <button className="primary">Upload CSV</button>

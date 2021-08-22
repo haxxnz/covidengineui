@@ -191,7 +191,6 @@ section.container-small4 {
   padding: 1.5rem;
   box-sizing: border-box;
   justify-self: center;
-  align-self: center;
 }
 
 .grid-map-2 {
@@ -201,6 +200,7 @@ section.container-small4 {
   padding: 1.5rem;
   margin: 0 auto;
   max-width: 1600px;
+  align-items: flex-start;
 }
 
 .map-container {

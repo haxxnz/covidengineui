@@ -417,7 +417,7 @@ function AllQRCodes() {
     return (
       <div className="App">
         <section className="container-small2">
-          <h1>Scan in after-the-fact to the locations of interest</h1>
+          <h1>Scan in to a location of interest</h1>
           <div className="hr" />
           <aside>Loading...</aside>
         </section>
@@ -428,7 +428,8 @@ function AllQRCodes() {
     return (
       <div className="App">
         <section className="container-small2">
-          <h1>Scan in after-the-fact to the locations of interest</h1>
+          <h1>Scan in to a location of interest</h1>
+          <p></p>
           <div className="hr" />
           <aside>Error loading page</aside>
         </section>
@@ -439,7 +440,7 @@ function AllQRCodes() {
   return (
     <div className="App">
       <section className="container-small2">
-        <h1>Scan in after-the-fact to the locations of interest</h1>
+        <h1>Scan in to a location of interest</h1>
         <div className="hr" />
         <aside>
           Know that you've been to a Location of Interest, but forgot to scan in? No problem!

@@ -422,7 +422,7 @@ function CSVUpload() {
 
   return (
     <div className="App">
-      <section className="container-small2">
+      <section className="container-small3">
         <h1>Upload a CSV</h1>
         <div className="hr" />
         <aside>
@@ -430,7 +430,7 @@ function CSVUpload() {
           <br />
           <br />
         </aside>
-        <div className="grid-2">
+       
           <label className='upload-primary'><p>Upload CSV</p>
             <input type="file" name="file" onChange={changeHandler} />
             </label>
@@ -439,7 +439,7 @@ function CSVUpload() {
               Submit
             </button>
           </div>
-        </div>
+       
       </section>
     </div>
   );

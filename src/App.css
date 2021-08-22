@@ -68,6 +68,7 @@ button {
   display: grid;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 .upload-primary:hover {

@@ -7,6 +7,9 @@ import { Map } from "./map";
 import QRCode from "qrcode.react";
 import { API_URL, getLois, LOI, loiToQrValue } from './App';
 import { getSessionUserId } from './csvUpload';
+import {
+  Link,
+} from "react-router-dom";
 
 const sessionUserId = getSessionUserId();
 export default function Issue() {
@@ -68,6 +71,12 @@ export default function Issue() {
               </button>
             </a>
             </> : null}
+            <Link to="/">
+              <button style={{ margin: "0.5rem 0 0 0" }} className="secondary">
+                Back to Start
+              </button>
+            </Link>
+
           </div>
 
           <div className="hr" />

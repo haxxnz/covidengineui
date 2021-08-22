@@ -270,9 +270,15 @@ function Issue() {
 
                       <div>
                         {new Date(loi.start).toLocaleDateString()}{" "}
-                        {new Date(loi.start).toLocaleTimeString()} -{" "}
-                        {new Date(loi.end).toLocaleDateString()}{" "}
-                        {new Date(loi.end).toLocaleTimeString()}
+                        {new Date(loi.start).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}{" "}
+                        - {new Date(loi.end).toLocaleDateString()}{" "}
+                        {new Date(loi.end).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </div>
                     </p>
                     <div>
@@ -481,9 +487,15 @@ function ExposureLocationsQrCodes({
               <div>{el.location}</div>
               <div>
                 {new Date(el.start).toLocaleDateString()}{" "}
-                {new Date(el.start).toLocaleTimeString()} -{" "}
-                {new Date(el.end).toLocaleDateString()}{" "}
-                {new Date(el.end).toLocaleTimeString()}
+                {new Date(el.start).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}{" "}
+                - {new Date(el.end).toLocaleDateString()}{" "}
+                {new Date(el.end).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </div>
             </div>
 

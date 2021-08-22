@@ -220,6 +220,10 @@ section.container-small4 {
   gap: 1rem;
   margin: 2rem 0;
 }
+.promo-icon {
+  width: 64px;
+  height: 64px;
+}
 
 .promo-container img {
   width: 100%;
@@ -255,6 +259,8 @@ section.container-small4 {
   object-position: center top;
   display: block;
   animation: bounce 5s infinite alternate;
+  height: 425px;
+  width: 320px;
 }
 
 .grid-2 button {

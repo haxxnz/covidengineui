@@ -1,14 +1,13 @@
-import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+/* eslint-disable import/no-webpack-loader-syntax */
+import mapboxgl from "mapbox-gl";
 import React, { useEffect, useRef } from "react";
-import {
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoid3NlYWdhciIsImEiOiJja3NsY3JjbHowNjF4MnBwbmJvcDFscDRwIn0.ONanvuiNYY7KcoooHlspew";
-export function Map({ lois }) {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
+export function Map({ lois }: any) {
+  const mapContainer = useRef<any>(null);
+  const map = useRef<any>(null);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -26,7 +25,7 @@ export function Map({ lois }) {
           new mapboxgl.Popup().setHTML(
             loi.transactions
               .map(
-                (t) =>
+                (t: any) =>
                   `<h3>${t.merchant.name}</h3><p>${new Date(
                     t.date
                   ).toLocaleString()}</p>`
@@ -46,16 +45,26 @@ export function Map({ lois }) {
       <div className="map-container">
         <div ref={mapContainer} className="map-map" />
         <div className="hide-mobile grid-3">
-          {lois.length ? <>
-          <button style={{ margin: "1rem 0 0 0" }} className="primary" onClick={() => alert('Please scan the QR codes, set the dates you\'ve been at those locations, go to My data -> Share my digital diary')}>
-            Send Data to Ministry of Health
-          </button>
-          <a href="tel:08003585453">
-            <button style={{ margin: "1rem 0 0 0" }} className="primary">
-              Contact HealthLine
-            </button>
-          </a>
-          </> : null}
+          {lois.length ? (
+            <>
+              <button
+                style={{ margin: "1rem 0 0 0" }}
+                className="primary"
+                onClick={() =>
+                  alert(
+                    "Please scan the QR codes, set the dates you've been at those locations, go to My data -> Share my digital diary"
+                  )
+                }
+              >
+                Send Data to Ministry of Health
+              </button>
+              <a href="tel:08003585453">
+                <button style={{ margin: "1rem 0 0 0" }} className="primary">
+                  Contact HealthLine
+                </button>
+              </a>
+            </>
+          ) : null}
         </div>
         <div
           style={{

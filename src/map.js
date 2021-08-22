@@ -17,7 +17,7 @@ export function Map({ lois }) {
     });
 
     for (const loi of lois) {
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({ color: "#b40219" })
         .setLngLat([loi.coordinates.lat, loi.coordinates.lng])
         .setPopup(
           new mapboxgl.Popup().setHTML(

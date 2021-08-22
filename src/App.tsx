@@ -239,29 +239,35 @@ function Issue() {
                 }}
               >
                 <div>
+               
                   <strong>
                     {loi.event
                       .split(" ")
                       .slice(0, loi.event.split(" ").length - 1)
                       .join(" ")}
                   </strong>
-                  <br />
-                  {loi.location}
+                     <p style={{color: "#666"}}>
+                
+                    {loi.location}
+                  
                   <div>
                   {new Date(loi.start).toLocaleDateString()} {new Date(loi.start).toLocaleTimeString()} -{" "}
                   {new Date(loi.end).toLocaleDateString()} {new Date(loi.end).toLocaleTimeString()}
-                  </div>
+                    </div>
+                      </p>
                   <div>
                     <br />
-                    You've been here at:
+                    You might have been here at:
+                  <ul>
                     {loi.transactions.map((transaction) => {
                       return (
-                        <div>
+                        <li>
                           <>{new Date(transaction.date).toLocaleDateString()}</>
                           &nbsp;({transaction.merchant.name})
-                        </div>
+                        </li>
                       );
                     })}
+                      </ul>
                   </div>
                 </div>
                 <div>

@@ -213,12 +213,14 @@ function Issue() {
         <aside className="title-description">
           Please stay at home and contact healthline for a COVID Test
         </aside>
-        <button style={{ margin: "1rem 0 0 0" }} className="primary">
-          Send Data to Ministry of Health
-        </button>
-        <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
-          Contact HealthLine
-        </button>
+               <div className="hide-desktop">
+          <button style={{ margin: "1rem 0 0 0" }} className="primary">
+            Send Data to Ministry of Health
+          </button>
+          <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
+            Contact HealthLine
+          </button>
+        </div>
        
        
         <div className="hr" />

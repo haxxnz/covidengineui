@@ -40,23 +40,33 @@ export function Map({ lois }) {
         borderRadius: "24px",
       }}
     >
-      <div
-        style={{
-          backgroundColor: "rgba(35, 55, 75, 0.9)",
-          color: "#ffffff",
-          padding: "6px 12px",
-          fontFamily: "monospace",
-          zIndex: 1,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          margin: "12px",
-          borderRadius: "4px",
-        }}
-      >
-        {lois.length} Locations of interest
+      <div className="map-container">
+        <div ref={mapContainer} className="map-map" />
+        <div className="hide-mobile">
+          <button style={{ margin: "1rem 0 0 0" }} className="primary">
+            Send Data to Ministry of Health
+          </button>
+          <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
+            Contact HealthLine
+          </button>
+        </div>
+        <div
+          style={{
+            backgroundColor: "rgba(35, 55, 75, 0.9)",
+            color: "#ffffff",
+            padding: "6px 12px",
+            fontFamily: "monospace",
+            zIndex: 1,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            margin: "12px",
+            borderRadius: "4px",
+          }}
+        >
+          {lois.length} Locations of interest
+        </div>
       </div>
-      <div ref={mapContainer} className="map-map" />
     </div>
   );
 }

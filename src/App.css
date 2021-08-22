@@ -203,13 +203,15 @@ section.container-small4 {
   max-width: 1600px;
 }
 
+.map-container {
+  position: sticky !important;
+  top: 1.5rem;
+}
+
 .map-map {
   height: 60vh;
   border-radius: 24px;
-  overflow: hidden;
   box-shadow: 0px 4px 24px rgb(0 0 0 / 12%);
-  position: sticky !important;
-  top: 1.5rem;
 }
 
 .promo-container {
@@ -253,7 +255,19 @@ section.container-small4 {
   margin-top: 1.5rem;
 }
 
+@media screen and (min-width: 768px) {
+  .hide-desktop {
+    display: none
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .hide-mobile {
+    display: none
+  }
+  .hide-desktop {
+    display: block
+  }
   .grid-map-2 {
     grid-template-columns: 1fr;
   }

@@ -71,11 +71,6 @@ export default function Issue() {
               </button>
             </a>
             </> : null}
-            <Link to="/">
-              <button style={{ margin: "0.5rem 0 0 0" }} className="secondary">
-                Back to Start
-              </button>
-            </Link>
 
           </div>
 
@@ -164,6 +159,12 @@ export default function Issue() {
               <div className="hr" />
             </>
           ))}
+          <Link to="/">
+            <button style={{ margin: "0.5rem 0 0 0" }} className="secondary">
+              Back to Start
+            </button>
+          </Link>
+
         </section>
       </div>
     </div>

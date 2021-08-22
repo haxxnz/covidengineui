@@ -56,12 +56,6 @@ export function Map({ lois }) {
             </button>
           </a>
           </> : null}
-
-          <Link to="/">
-            <button style={{ margin: "1rem 0 0 0" }} className="secondary">
-              Back to Start
-            </button>
-          </Link>
         </div>
         <div
           style={{

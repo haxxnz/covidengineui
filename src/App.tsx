@@ -439,7 +439,7 @@ function AllQRCodes() {
   return (
     <div className="App">
       <section className="container-small2">
-        <h1>Scan in after-the-fact to the locations of interest</h1>
+        <h1>Scan in after-the-fact to the Locations of Interest</h1>
         <div className="hr" />
         <aside>
           <strong>Have you been to a Location of Interest, but forgot to scan in? </strong>

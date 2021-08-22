@@ -204,14 +204,25 @@ function Issue() {
   }
   return (
     <div className="App">
-      <section className="container-small3">
+          <div className='grid-map-2'>
+        <Map lois={lois} />
+        
+      <section className="container-small4">
+    
         <h1>You might be exposed to COVID </h1>
         <aside className="title-description">
           Please stay at home and contact healthline for a COVID Test
         </aside>
-        <h3>Potential Exposure Events</h3>
-        <Map lois={lois} />
+        <button style={{ margin: "1rem 0 0 0" }} className="primary">
+          Send Data to Ministry of Health
+        </button>
+        <button style={{ margin: "0.5rem 0 0 0" }} className="primary">
+          Contact HealthLine
+        </button>
+       
+       
         <div className="hr" />
+         <h2 style={{ margin: "0 0 0.5rem 0" }} >Potential Exposure Events</h2>
         <p>
           Please review the exposure events and scan the QR codes to import the
           missed scan-ins to the NZ Covid Tracer app
@@ -278,18 +289,9 @@ function Issue() {
           </>
         ))}
 
-        <button style={{ margin: "1.5rem 0 0 0" }} className="primary">
-          Send Data to Ministry of Health
-        </button>
-        <button style={{ margin: "1rem 0 0 0" }} className="primary">
-          Contact HealthLine
-        </button>
-        <Link to="/">
-          <button style={{ margin: "1rem 0 0 0" }} className="secondary">
-            Back to Start
-          </button>
-        </Link>
-      </section>
+
+        </section>
+        </div>
     </div>
   );
 }
@@ -347,6 +349,11 @@ function Transaction() {
             </Link>
           </div>
         </div>
+         <Link to="/">
+          <button style={{ margin: "1rem 0 0 0" }} className="secondary">
+            Back to Start
+          </button>
+        </Link>
       </section>
     </div>
   );
@@ -418,9 +425,11 @@ function CSVUpload() {
           <br />
         </aside>
         <div className="grid-2">
-          <input type="file" name="file" onChange={changeHandler} />
+          <label className='upload-primary'><p>Upload CSV</p>
+            <input type="file" name="file" onChange={changeHandler} />
+            </label>
           <div>
-            <button onClick={handleSubmission} disabled={!isFilePicked}>
+            <button className='primary' onClick={handleSubmission} disabled={!isFilePicked}>
               Submit
             </button>
           </div>

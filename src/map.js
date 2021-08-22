@@ -35,7 +35,11 @@ export function Map({ lois }) {
     }
   });
   return (
-    <div>
+    <div
+      style={{
+        borderRadius: "24px",
+      }}
+    >
       <div
         style={{
           backgroundColor: "rgba(35, 55, 75, 0.9)",
@@ -52,7 +56,7 @@ export function Map({ lois }) {
       >
         {lois.length} Locations of interest
       </div>
-      <div ref={mapContainer} style={{ height: "400px" }} />
+      <div ref={mapContainer} className="map-map" />
     </div>
   );
 }

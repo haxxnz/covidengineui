@@ -1,25 +1,20 @@
 import React, { Suspense } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import { Base64 } from "js-base64";
 
-import { Home } from './home';
+import { Home } from "./home";
 
-const Clear = React.lazy(() => import('./clearPage'));
-const CSVUpload = React.lazy(() => import('./csvUpload'));
-const Issue = React.lazy(() => import('./issuePage'));
-const AllQRCodes = React.lazy(() => import('./qrCodePage'));
-const Transaction = React.lazy(() => import('./transactionPage'));
+const Clear = React.lazy(() => import("./clearPage"));
+const CSVUpload = React.lazy(() => import("./csvUpload"));
+const Issue = React.lazy(() => import("./issuePage"));
+const AllQRCodes = React.lazy(() => import("./qrCodePage"));
+const Transaction = React.lazy(() => import("./transactionPage"));
 
 export const API_URL =
   window.location.host === "localhost:3000"
     ? "http://localhost:3001"
     : "https://api.covidengine.ml";
-
 
 export interface ImpoverishedTransaction {
   _id: string;

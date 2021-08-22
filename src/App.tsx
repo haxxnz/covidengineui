@@ -379,8 +379,8 @@ function Clear() {
 }
 
 function Transaction() {
-  const redirect_uri = `https://oauth.covidengine.ml/auth/akahu?sessionUserId=${sessionUserId}`
-  const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT`
+  const redirect_uri = 'https://oauth.covidengine.ml/auth/akahu'
+  const url = `https://oauth.akahu.io/?client_id=app_token_cksl325vd000109mjaenwgicd&response_type=code&redirect_uri=${redirect_uri}&scope=ENDURING_CONSENT&state=${sessionUserId}`
   return (
     <div className="App">
       <section className="container-small2">

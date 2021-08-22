@@ -441,14 +441,21 @@ function AllQRCodes() {
     <div className="App">
       <section className="container-small2">
         <h1>Scan in to a location of interest</h1>
+
         <div className="hr" />
         <aside>
-          Know that you've been to a Location of Interest, but forgot to scan in? No problem!
+          <strong>Have you been to a Location of interest, but forgot to scan in? </strong>
+          <div>No problem! You can scan it properly, including the Global Location Number, on this page! This way, instead of adding a manual diary entry, you will actually get an exposure notification.
+          </div>
           <br />
-          You can scan it in properly, including the Global Location Number on this page! <br/>
-          This way, instead of adding a manual diary entry, you will actually get an exposure notification.
+        </aside>
+
+        <aside>
+          <strong>Why some QR codes are not available?</strong>
+          <div>Some <i>Locations of Interest</i> have not been published as <i>Exposure Event</i> locations, so we can't match Global Location Numbers to them.</div>
           <br />
           <br />
+
         </aside>
         <div className="grid-2">
           {exposureLocations.map((el) => {

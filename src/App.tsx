@@ -85,16 +85,8 @@ function saveLois(lois: LOI[]) {
   localStorage.setItem("lois", JSON.stringify(lois));
 }
 function getLois(): LOI[] | null {
-  const urlLoisEncoded = (new URL(document.location.href)).searchParams.get('loisEncoded')
-  if (urlLoisEncoded) {
-    const str = Base64.decode(urlLoisEncoded)
-    const lois = JSON.parse(str)
-    return lois
-  }
-  else {
-    const tmp = localStorage.getItem("lois");
-    return JSON.parse(tmp ?? "null");
-  }
+  const tmp = localStorage.getItem("lois");
+  return JSON.parse(tmp ?? "null");
 }
 
 console.log("sessionUserId", sessionUserId);
@@ -216,7 +208,36 @@ function loiToQrValue(exposedLocation: ExposureLocation) {
 }
 
 function Issue() {
-  const lois = useMemo(() => getLois(), []);
+  const fromAkahu = new URL(document.location.href).searchParams.get(
+    "fromAkahu"
+  );
+  const [lois, setLois] = useState<null | undefined | LOI[]>(undefined);
+  useEffect(() => {
+    async function fetchLois() {
+      if (fromAkahu) {
+        const res = await fetch(
+          `${API_URL}/mylois?sessionUserId=${sessionUserId}`
+        );
+        const result = await res.json();
+        setLois(result.lois);
+      } else {
+        setLois(getLois());
+      }
+    }
+    fetchLois();
+  }, [fromAkahu]);
+
+  if (typeof lois === "undefined") {
+    return (
+      <div className="App">
+        <div className="grid-map-2">
+          <section className="container-small4">
+            <h1>Loading... </h1>
+          </section>
+        </div>
+      </div>
+    );
+  }
 
   if (lois === null) {
     return (

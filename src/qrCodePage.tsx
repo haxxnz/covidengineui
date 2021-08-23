@@ -73,7 +73,7 @@ export default function AllQRCodes() {
             </div>
           </div>
           <div style={{textAlign: 'center', flex: 1}}>
-            <h3 style={{margin:0}}>Exposure Locations</h3>
+            <h3 style={{margin:0}}>Exposure Event locations</h3>
             <div>
               {loading ? <span>Loading...</span> : <h1>{exposureLocations.filter(l => l.gln).length}</h1>}  
             </div>

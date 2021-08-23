@@ -100,6 +100,32 @@ export default function AllQRCodes() {
             </div>
             <br />
             <br />
+
+            <aside>
+              <strong>What data sources are you using?</strong>
+              <div>
+                <div>
+                  Locations of Interest:{" "}
+                  <a href="https://github.com/minhealthnz/nz-covid-data/blob/main/locations-of-interest/august-2021/locations-of-interest.geojson">
+                    https://github.com/minhealthnz/nz-covid-data/blob/main/locations-of-interest/august-2021/locations-of-interest.geojson
+                  </a>
+                </div>
+                <div>
+                  Exposure Events:{" "}
+                  <a href="https://exposure-events.tracing.covid19.govt.nz/current-exposure-events.json">
+                    https://exposure-events.tracing.covid19.govt.nz/current-exposure-events.json
+                  </a>
+                </div>
+                <div>
+                  Reversed GLN hashes:{" "}
+                  <a href="https://github.com/CovidEngine/reverseglnhashes/blob/main/glnPairs.json">
+                    https://github.com/CovidEngine/reverseglnhashes/blob/main/glnPairs.json
+                  </a>
+                </div>
+              </div>
+              <br />
+            </aside>
+
             <Link to="/">
               <button style={{ margin: "1rem 0 0 0" }} className="secondary">
                 Back to Start

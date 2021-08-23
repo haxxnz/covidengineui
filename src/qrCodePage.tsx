@@ -8,6 +8,7 @@ export default function AllQRCodes() {
   const [exposureLocations, setExposureLocations] = useState<
     ExposureLocation[]
   >([]);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState("")
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   async function fetchExposureLocations() {
@@ -17,6 +18,7 @@ export default function AllQRCodes() {
       const res = await fetch(`${API_URL}/exposurelocations`);
       const data = await res.json();
       setExposureLocations(data.exposureLocations);
+      setLastUpdatedAt(data.glnLastUpdatedAt)
     } catch (e) {
       setError(e);
     }
@@ -53,6 +55,33 @@ export default function AllQRCodes() {
           </div>
           <br />
         </aside>
+
+        <aside>
+          <strong>When this was last updated?</strong>
+          <div>
+            {loading ? 'Loading...' : new Date(lastUpdatedAt).toString()}  
+          </div>
+          <br />
+        </aside>
+
+        <aside style={{display: 'flex', justifyContent: "space-between"}}>
+
+          <div style={{textAlign: 'center', flex: 1}}>
+            <h3 style={{margin:0}}>Locations of Interest</h3>
+            <div>
+              {loading ? <span>Loading...</span> : <h1>{exposureLocations.length}</h1>}  
+            </div>
+          </div>
+          <div style={{textAlign: 'center', flex: 1}}>
+            <h3 style={{margin:0}}>Exposure Locations</h3>
+            <div>
+              {loading ? <span>Loading...</span> : <h1>{exposureLocations.filter(l => l.gln).length}</h1>}  
+            </div>
+          </div>
+          <br />
+        </aside>
+
+
 
         {error ? <aside>Error Loading page</aside> : null}
         {!error && loading ? <aside>Loading...</aside> : null}

@@ -31,7 +31,7 @@ export default function AllQRCodes() {
   return (
     <div className="App">
       <section className="container-small2">
-        <h1>Scan in to a location of interest</h1>
+        <h1>Scan in to a Location of Interest</h1>
 
         <div className="hr" />
         <aside>

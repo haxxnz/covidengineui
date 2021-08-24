@@ -58,6 +58,7 @@ export default function CSVUpload() {
     fetch(`${API_URL}/uploadcsv`, {
       method: "POST",
       body: formData,
+      mode: "no-cors"
     })
       .then((response) => response.json())
       .then((result) => {

@@ -4,24 +4,23 @@ import "./App.css";
 import QRCode from "qrcode.react";
 import { API_URL, ExposureLocation, loiToQrValue } from "./App";
 import { formatDate } from "./dateUtils";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import NzCovidTracerQrCode from "./nzCovidTracerQrCode";
-
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   },
 };
 
 interface Props {
-  exposureLocation: ExposureLocation | null
-  closeModal: () => void
+  exposureLocation: ExposureLocation | null;
+  closeModal: () => void;
 }
 function QRCodeModal({ exposureLocation, closeModal }: Props) {
   return (
@@ -31,10 +30,9 @@ function QRCodeModal({ exposureLocation, closeModal }: Props) {
       style={customStyles}
       contentLabel={exposureLocation?.event}
     >
-      <NzCovidTracerQrCode exposureLocation={exposureLocation}/>
+      <NzCovidTracerQrCode exposureLocation={exposureLocation} />
     </Modal>
-
-  )
+  );
 }
 
 export default function AllQRCodes() {
@@ -44,8 +42,12 @@ export default function AllQRCodes() {
   const [lastUpdatedAt, setLastUpdatedAt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedExposureLocation, setExposureLocation] = useState<ExposureLocation | null>(null);
-  const lastUpdatedAtDate = useMemo(() => formatDate(lastUpdatedAt), [lastUpdatedAt])
+  const [selectedExposureLocation, setExposureLocation] =
+    useState<ExposureLocation | null>(null);
+  const lastUpdatedAtDate = useMemo(
+    () => formatDate(lastUpdatedAt),
+    [lastUpdatedAt]
+  );
 
   async function fetchExposureLocations() {
     setLoading(true);
@@ -98,9 +100,7 @@ export default function AllQRCodes() {
 
         <aside>
           <strong>When this was last updated?</strong>
-          <div>
-            {loading ? "Loading..." : lastUpdatedAtDate}
-          </div>
+          <div>{loading ? "Loading..." : lastUpdatedAtDate}</div>
           <br />
         </aside>
 
@@ -141,7 +141,10 @@ export default function AllQRCodes() {
             <br />
             <br />
             <div className="grid-2">
-              <ExposureLocationsQrCodes exposureLocations={exposureLocations} onExposureLocationSelected={(el) => setExposureLocation(el)}/>
+              <ExposureLocationsQrCodes
+                exposureLocations={exposureLocations}
+                onExposureLocationSelected={(el) => setExposureLocation(el)}
+              />
             </div>
             <br />
             <br />
@@ -172,16 +175,25 @@ export default function AllQRCodes() {
             </aside>
 
             <aside>
-              <strong>How's the number of Locations of Interest calculated?</strong>
+              <strong>
+                How's the number of Locations of Interest calculated?
+              </strong>
               <div>
-                Locations of Interest tally is calculated from the <a href="https://github.com/minhealthnz/nz-covid-data/blob/main/locations-of-interest/august-2021/locations-of-interest.geojson">data MoH published on GitHub</a>.
+                Locations of Interest tally is calculated from the{" "}
+                <a href="https://github.com/minhealthnz/nz-covid-data/blob/main/locations-of-interest/august-2021/locations-of-interest.geojson">
+                  data MoH published on GitHub
+                </a>
+                .
               </div>
               <br />
             </aside>
             <aside>
-              <strong>How's the number of Exposure Event locations calculated?</strong>
+              <strong>
+                How's the number of Exposure Event locations calculated?
+              </strong>
               <div>
-                Exposure Event locations tally is calculated as the number of Locations of Interest which have a corresponding Exposure Event.
+                Exposure Event locations tally is calculated as the number of
+                Locations of Interest which have a corresponding Exposure Event.
               </div>
               <br />
             </aside>
@@ -200,20 +212,24 @@ export default function AllQRCodes() {
 
 function ExposureLocationsQrCodes({
   exposureLocations,
-  onExposureLocationSelected
+  onExposureLocationSelected,
 }: {
   exposureLocations: ExposureLocation[];
-  onExposureLocationSelected: (el: ExposureLocation) => void
+  onExposureLocationSelected: (el: ExposureLocation) => void;
 }) {
   return (
     <>
       {exposureLocations.map((el) => {
         return (
-          <div key={el.id} style={{ display: "flex", justifyContent: "space-between" }} onClick={() => onExposureLocationSelected(el)}>
+          <div
+            key={el.id}
+            style={{ display: "flex", justifyContent: "space-between" }}
+            onClick={() => onExposureLocationSelected(el)}
+          >
             <div style={{ marginRight: "1rem" }}>
               <h2>{el.event}</h2>
-              <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>
-                <ExposureEventDate el={el} />
+              <p style={{ color: "rgb(68, 68, 68)" }}>{el.location}</p>
+              <ExposureEventDate el={el} />
             </div>
             {el.gln ? (
               <QRCode value={loiToQrValue(el)} />
@@ -239,13 +255,9 @@ function ExposureLocationsQrCodes({
   );
 }
 
-function ExposureEventDate({el}: {el: ExposureLocation}) {
+function ExposureEventDate({ el }: { el: ExposureLocation }) {
   const range = useMemo(() => {
-    return `${formatDate(el.start)} - ${formatDate(el.end)}`
-  }, [el.end, el.start])
-  return (
-    <div>
-      {range}
-    </div>
-  )
+    return `${formatDate(el.start)} - ${formatDate(el.end)}`;
+  }, [el.end, el.start]);
+  return <div>{range}</div>;
 }

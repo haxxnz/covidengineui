@@ -102,9 +102,8 @@ export default function Issue() {
             </p>
           ) : null}
           <div className="hr" />
-          {lois.map((loi) => (
-            <>
-              <p>
+          {lois.map((loi, i) => (
+              <div key={i}>
                 <div
                   style={{
                     display: "flex",
@@ -119,20 +118,20 @@ export default function Issue() {
                         .slice(0, loi.event.split(" ").length - 1)
                         .join(" ")}
                     </strong>
-                    <p style={{ color: "#444" }}>
+                    <div style={{ color: "#444" }}>
                       {loi.location}
 
                       <div>
                         {formatDate(loi.start)} - {formatDate(loi.end)}
                       </div>
-                    </p>
+                    </div>
                     <div>
                       <br />
                       You might have been here at:
                       <ul>
-                        {loi.transactions.map((transaction) => {
+                        {loi.transactions.map((transaction, i) => {
                           return (
-                            <li>
+                            <li key={i}>
                               <>
                                 {new Date(
                                   transaction.date
@@ -164,10 +163,8 @@ export default function Issue() {
                     )}
                   </div>
                 </div>
-              </p>
-
-              <div className="hr" />
-            </>
+                <div className="hr" />
+              </div>
           ))}
           <Link to="/">
             <button style={{ margin: "0.5rem 0 0 0" }} className="secondary">

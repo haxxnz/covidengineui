@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import {
   API_URL,
-  ExposureLocation,
-  ICoordinates,
-  ImpoverishedTransaction,
   LOI,
 } from "./App";
 import "./App.css";

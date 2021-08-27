@@ -166,9 +166,9 @@ function ExposureLocationsQrCodes({
 }) {
   return (
     <>
-      {exposureLocations.map((el) => {
+      {exposureLocations.map((el, i) => {
         return (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div key={i} style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ marginRight: "1rem" }}>
               <h2>{el.event}</h2>
               <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>

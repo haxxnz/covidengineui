@@ -101,40 +101,30 @@ export default function AllQRCodes() {
           <br />
         </aside>
 
-        <aside>
-          <strong>When this was last updated?</strong>
-          <div>{loading ? "Loading..." : lastUpdatedAtDate}</div>
-          <br />
-        </aside>
-
-        <aside style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ textAlign: "center", flex: 1 }}>
-            <h3 style={{ margin: 0 }}>Locations of Interest</h3>
-            <div>
-              {loading ? (
-                <span>Loading...</span>
-              ) : (
-                <h1>{exposureLocations.length}</h1>
-              )}
-            </div>
-          </div>
-          <div style={{ textAlign: "center", flex: 1 }}>
-            <h3 style={{ margin: 0 }}>Exposure Event locations</h3>
-            <div>
-              {loading ? (
-                <span>Loading...</span>
-              ) : (
-                <h1>{exposureLocations.filter((l) => l.gln).length}</h1>
-              )}
-            </div>
-          </div>
-          <br />
-        </aside>
-
         {error ? <aside>Error Loading page</aside> : null}
         {!error && loading ? <aside>Loading...</aside> : null}
         {!error && !loading ? (
           <>
+            <aside>
+              <strong>When this was last updated?</strong>
+              <div>{lastUpdatedAtDate}</div>
+              <br />
+            </aside>
+            <aside style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ textAlign: "center", flex: 1 }}>
+                <h3 style={{ margin: 0 }}>Locations of Interest</h3>
+                <div>
+                  <h1>{exposureLocations.length}</h1>
+                </div>
+              </div>
+              <div style={{ textAlign: "center", flex: 1 }}>
+                <h3 style={{ margin: 0 }}>Exposure Event locations</h3>
+                <div>
+                  <h1>{exposureLocations.filter((l) => l.gln).length}</h1>
+                </div>
+              </div>
+              <br />
+            </aside>
             <Link to="/">
               <button style={{ margin: "1rem 0 0 0" }} className="secondary">
                 Back to Start

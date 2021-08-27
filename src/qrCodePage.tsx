@@ -4,6 +4,66 @@ import "./App.css";
 import QRCode from "qrcode.react";
 import { API_URL, ExposureLocation, loiToQrValue } from "./App";
 import { formatDate } from "./dateUtils";
+import Modal from 'react-modal';
+
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+interface Props {
+  exposureLocation: ExposureLocation | null
+  closeModal: () => void
+}
+function QRCodeModal({ exposureLocation, closeModal }: Props) {
+  const el = exposureLocation
+  return (
+    <Modal
+      isOpen={!!el}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel={el?.event}
+    >
+      {el ?
+      <>
+        <div style={{ marginRight: "1rem" }}>
+          <h2>{el.event}</h2>
+          <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>
+          <div>
+            {formatDate(el.start)} - {formatDate(el.end)}
+          </div>
+        </div>
+
+        {el.gln ? (
+          <QRCode value={loiToQrValue(el)} />
+        ) : (
+          <div
+            style={{
+              width: 128,
+              minWidth: 128,
+              height: 128,
+              border: "1px solid black",
+              display: "flex",
+              textAlign: "center",
+              alignItems: "center",
+            }}
+          >
+            QR code not available
+          </div>
+        )}
+        </>
+        : null}
+    </Modal>
+
+  )
+}
 
 export default function AllQRCodes() {
   const [exposureLocations, setExposureLocations] = useState<
@@ -12,6 +72,8 @@ export default function AllQRCodes() {
   const [lastUpdatedAt, setLastUpdatedAt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedExposureLocation, setExposureLocation] = useState<ExposureLocation | null>(null);
+
   async function fetchExposureLocations() {
     setLoading(true);
     setError(null);
@@ -31,6 +93,10 @@ export default function AllQRCodes() {
 
   return (
     <div className="App">
+      <QRCodeModal
+        exposureLocation={selectedExposureLocation}
+        closeModal={() => setExposureLocation(null)}
+      />
       <section className="container-small2">
         <h1>Scan in to a Location of Interest</h1>
 
@@ -102,7 +168,7 @@ export default function AllQRCodes() {
             <br />
             <br />
             <div className="grid-2">
-              <ExposureLocationsQrCodes exposureLocations={exposureLocations} />
+              <ExposureLocationsQrCodes exposureLocations={exposureLocations} onExposureLocationSelected={(el) => setExposureLocation(el)}/>
             </div>
             <br />
             <br />
@@ -161,14 +227,16 @@ export default function AllQRCodes() {
 
 function ExposureLocationsQrCodes({
   exposureLocations,
+  onExposureLocationSelected
 }: {
   exposureLocations: ExposureLocation[];
+  onExposureLocationSelected: (el: ExposureLocation) => void
 }) {
   return (
     <>
       {exposureLocations.map((el, i) => {
         return (
-          <div key={i} style={{ display: "flex", justifyContent: "space-between" }}>
+          <div key={i} style={{ display: "flex", justifyContent: "space-between" }} onClick={() => onExposureLocationSelected(el)}>
             <div style={{ marginRight: "1rem" }}>
               <h2>{el.event}</h2>
               <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>

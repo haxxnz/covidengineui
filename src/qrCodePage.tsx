@@ -4,39 +4,8 @@ import "./App.css";
 import QRCode from "qrcode.react";
 import { API_URL, ExposureLocation, loiToQrValue } from "./App";
 import { formatDate } from "./dateUtils";
-import Modal from "react-modal";
-import NzCovidTracerQrCode from "./nzCovidTracerQrCode";
+import { QRCodeModal } from "./QRCodeModal";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-  overlay: {
-    backgroundColor: '#bde4f2'
-  }
-};
-
-interface Props {
-  exposureLocation: ExposureLocation | null;
-  closeModal: () => void;
-}
-function QRCodeModal({ exposureLocation, closeModal }: Props) {
-  return (
-    <Modal
-      isOpen={!!exposureLocation}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel={exposureLocation?.event}
-    >
-      <NzCovidTracerQrCode exposureLocation={exposureLocation} />
-    </Modal>
-  );
-}
 
 export default function AllQRCodes() {
   const [exposureLocations, setExposureLocations] = useState<

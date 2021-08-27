@@ -97,7 +97,7 @@ export default function CSVUpload() {
         <h1>Upload a CSV</h1>
         <div className="hr" />
         <aside>
-          Only ANZ and BNZ accounts are supported.
+          Only ANZ and BNZ accounts are supported. <a href="/demo.csv" download="demo.csv">Demo data csv</a>.
           <br />
           <br />
         </aside>

@@ -38,7 +38,7 @@ export default function Transaction() {
               
 
               <br />
-              We don’t store any of your bank data. <a href="https://raw.githubusercontent.com/CovidEngine/covidengineui/main/demo.csv">Demo data link</a>
+              We don’t store any of your bank data. Demo available.
             </aside>
             <Link to="/csv">
               <button className="primary">Upload CSV</button>

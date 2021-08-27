@@ -15,7 +15,7 @@ export default function Issue() {
     "fromAkahu"
   );
   const [lois, setLois] = useState<null | undefined | LOI[]>(undefined);
-  const [selectedLoi, setSelectedLoi] = useState< LOI |  null >(null);
+  const [selectedLoi, setSelectedLoi] = useState<LOI | null>(null);
 
   useEffect(() => {
     async function fetchLois() {
@@ -110,69 +110,74 @@ export default function Issue() {
           ) : null}
           <div className="hr" />
           {lois.map((loi, i) => (
-            <div key={i}
+            <div
+              key={i}
               className="exposure-location"
               onClick={() => setSelectedLoi(loi)}
             >
-              <div style={{display: 'flex', flexDirection: 'column', flex:1}}>
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
+                style={{ display: "flex", flexDirection: "column", flex: 1 }}
               >
-                <div>
-                  <strong>
-                    {loi.event
-                      .split(" ")
-                      .slice(0, loi.event.split(" ").length - 1)
-                      .join(" ")}
-                  </strong>
-                  <div style={{ color: "#444" }}>
-                    {loi.location}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <strong>
+                      {loi.event
+                        .split(" ")
+                        .slice(0, loi.event.split(" ").length - 1)
+                        .join(" ")}
+                    </strong>
+                    <div style={{ color: "#444" }}>
+                      {loi.location}
 
+                      <div>
+                        {formatDate(loi.start)} - {formatDate(loi.end)}
+                      </div>
+                    </div>
                     <div>
-                      {formatDate(loi.start)} - {formatDate(loi.end)}
+                      <br />
+                      You might have been here at:
+                      <ul>
+                        {loi.transactions.map((transaction, i) => {
+                          return (
+                            <li key={i}>
+                              <>
+                                {new Date(
+                                  transaction.date
+                                ).toLocaleDateString()}
+                              </>
+                              &nbsp;({transaction.merchant.name})
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
                   </div>
                   <div>
-                    <br />
-                    You might have been here at:
-                    <ul>
-                      {loi.transactions.map((transaction, i) => {
-                        return (
-                          <li key={i}>
-                            <>
-                              {new Date(transaction.date).toLocaleDateString()}
-                            </>
-                            &nbsp;({transaction.merchant.name})
-                          </li>
-                        );
-                      })}
-                    </ul>
+                    {loi.gln ? (
+                      <QRCode value={loiToQrValue(loi)} />
+                    ) : (
+                      <div
+                        style={{
+                          width: 128,
+                          height: 128,
+                          border: "1px solid black",
+                          display: "flex",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        QR code not available
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div>
-                  {loi.gln ? (
-                    <QRCode value={loiToQrValue(loi)} />
-                  ) : (
-                    <div
-                      style={{
-                        width: 128,
-                        height: 128,
-                        border: "1px solid black",
-                        display: "flex",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      QR code not available
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="hr" />
+                <div className="hr" />
               </div>
             </div>
           ))}

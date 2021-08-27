@@ -155,7 +155,7 @@ function ExposureLocationsQrCodes({
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ marginRight: "1rem" }}>
               <h2>{el.event}</h2>
-              <div>{el.location}</div>
+              <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>
               <div>
                 {new Date(el.start).toLocaleDateString()}{" "}
                 {new Date(el.start).toLocaleTimeString([], {

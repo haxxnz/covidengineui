@@ -16,6 +16,9 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
+  overlay: {
+    backgroundColor: '#bde4f2'
+  }
 };
 
 interface Props {
@@ -223,7 +226,7 @@ function ExposureLocationsQrCodes({
         return (
           <div
             key={el.id}
-            style={{ display: "flex", justifyContent: "space-between" }}
+            className="exposure-location"
             onClick={() => onExposureLocationSelected(el)}
           >
             <div style={{ marginRight: "1rem" }}>
@@ -243,6 +246,7 @@ function ExposureLocationsQrCodes({
                   display: "flex",
                   textAlign: "center",
                   alignItems: "center",
+                  backgroundColor: "white",
                 }}
               >
                 QR code not available

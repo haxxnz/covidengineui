@@ -7,6 +7,7 @@ import { API_URL, getLois, LOI, loiToQrValue } from "./App";
 import { getSessionUserId } from "./csvUpload";
 import { Link } from "react-router-dom";
 import { formatDate } from "./dateUtils";
+import { QRCodeModal } from "./QRCodeModal";
 
 const sessionUserId = getSessionUserId();
 export default function Issue() {
@@ -14,6 +15,8 @@ export default function Issue() {
     "fromAkahu"
   );
   const [lois, setLois] = useState<null | undefined | LOI[]>(undefined);
+  const [selectedLoi, setSelectedLoi] = useState< LOI |  null >(null);
+
   useEffect(() => {
     async function fetchLois() {
       if (fromAkahu) {
@@ -52,6 +55,10 @@ export default function Issue() {
   }
   return (
     <div className="App">
+      <QRCodeModal
+        exposureLocation={selectedLoi}
+        closeModal={() => setSelectedLoi(null)}
+      />
       <div className="grid-map-2">
         <Map lois={lois} />
         <section className="container-small4">
@@ -103,7 +110,11 @@ export default function Issue() {
           ) : null}
           <div className="hr" />
           {lois.map((loi, i) => (
-            <div key={i}>
+            <div key={i}
+              className="exposure-location"
+              onClick={() => setSelectedLoi(loi)}
+            >
+              <div style={{display: 'flex', flexDirection: 'column', flex:1}}>
               <div
                 style={{
                   display: "flex",
@@ -162,6 +173,7 @@ export default function Issue() {
                 </div>
               </div>
               <div className="hr" />
+              </div>
             </div>
           ))}
           <Link to="/">

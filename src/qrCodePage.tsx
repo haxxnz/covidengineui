@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import QRCode from "qrcode.react";
@@ -142,6 +142,7 @@ export default function AllQRCodes() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedExposureLocation, setExposureLocation] = useState<ExposureLocation | null>(null);
+  const lastUpdatedAtDate = useMemo(() => formatDate(lastUpdatedAt), [lastUpdatedAt])
 
   async function fetchExposureLocations() {
     setLoading(true);
@@ -195,7 +196,7 @@ export default function AllQRCodes() {
         <aside>
           <strong>When this was last updated?</strong>
           <div>
-            {loading ? "Loading..." : formatDate(lastUpdatedAt)}
+            {loading ? "Loading..." : lastUpdatedAtDate}
           </div>
           <br />
         </aside>
@@ -303,17 +304,14 @@ function ExposureLocationsQrCodes({
 }) {
   return (
     <>
-      {exposureLocations.map((el, i) => {
+      {exposureLocations.map((el) => {
         return (
           <div key={el.id} style={{ display: "flex", justifyContent: "space-between" }} onClick={() => onExposureLocationSelected(el)}>
             <div style={{ marginRight: "1rem" }}>
               <h2>{el.event}</h2>
               <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>
-              <div>
-                {formatDate(el.start)} - {formatDate(el.end)}
-              </div>
+                <ExposureEventDate el={el} />
             </div>
-
             {el.gln ? (
               <QRCode value={loiToQrValue(el)} />
             ) : (
@@ -336,4 +334,15 @@ function ExposureLocationsQrCodes({
       })}
     </>
   );
+}
+
+function ExposureEventDate({el}: {el: ExposureLocation}) {
+  const range = useMemo(() => {
+    return `${formatDate(el.start)} - ${formatDate(el.end)}`
+  }, [el.end, el.start])
+  return (
+    <div>
+      {range}
+    </div>
+  )
 }

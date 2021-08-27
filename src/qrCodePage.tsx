@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./App.css";
 import QRCode from "qrcode.react";
 import { API_URL, ExposureLocation, loiToQrValue } from "./App";
+import { formatDate } from "./dateUtils";
 
 export default function AllQRCodes() {
   const [exposureLocations, setExposureLocations] = useState<
@@ -59,7 +60,7 @@ export default function AllQRCodes() {
         <aside>
           <strong>When this was last updated?</strong>
           <div>
-            {loading ? "Loading..." : new Date(lastUpdatedAt).toString()}
+            {loading ? "Loading..." : formatDate(lastUpdatedAt)}
           </div>
           <br />
         </aside>
@@ -172,16 +173,7 @@ function ExposureLocationsQrCodes({
               <h2>{el.event}</h2>
               <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>
               <div>
-                {new Date(el.start).toLocaleDateString()}{" "}
-                {new Date(el.start).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}{" "}
-                - {new Date(el.end).toLocaleDateString()}{" "}
-                {new Date(el.end).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {formatDate(el.start)} - {formatDate(el.end)}
               </div>
             </div>
 

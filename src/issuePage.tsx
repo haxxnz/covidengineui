@@ -6,6 +6,7 @@ import QRCode from "qrcode.react";
 import { API_URL, getLois, LOI, loiToQrValue } from "./App";
 import { getSessionUserId } from "./csvUpload";
 import { Link } from "react-router-dom";
+import { formatDate } from "./dateUtils";
 
 const sessionUserId = getSessionUserId();
 export default function Issue() {
@@ -122,16 +123,7 @@ export default function Issue() {
                       {loi.location}
 
                       <div>
-                        {new Date(loi.start).toLocaleDateString()}{" "}
-                        {new Date(loi.start).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}{" "}
-                        - {new Date(loi.end).toLocaleDateString()}{" "}
-                        {new Date(loi.end).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
+                        {formatDate(loi.start)} - {formatDate(loi.end)}
                       </div>
                     </p>
                     <div>

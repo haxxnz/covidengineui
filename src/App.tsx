@@ -32,8 +32,8 @@ export interface ExposureLocation {
   id: string;
   event: string;
   location: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   gln?: string;
 }
 
@@ -42,8 +42,8 @@ export interface LOI extends ExposureLocation {
   event: string;
   location: string;
   city: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   information: string;
   coordinates: ICoordinates;
   transactions: ImpoverishedTransaction[];

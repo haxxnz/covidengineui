@@ -5,6 +5,7 @@ import {
   ExposureLocation,
   ICoordinates,
   ImpoverishedTransaction,
+  LOI,
 } from "./App";
 import "./App.css";
 
@@ -117,21 +118,6 @@ export default function CSVUpload() {
       </section>
     </div>
   );
-}
-
-export interface LOI extends ExposureLocation {
-  id: string;
-  event: string;
-  location: string;
-  city: string;
-  start: Date;
-  end: Date;
-  information: string;
-  coordinates: ICoordinates;
-  transactions: ImpoverishedTransaction[];
-  eventId: string;
-  glnHash?: string;
-  gln?: string;
 }
 
 function saveLois(lois: LOI[]) {

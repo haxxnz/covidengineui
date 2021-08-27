@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import {
   API_URL,
   ExposureLocation,
@@ -43,6 +43,7 @@ export default function CSVUpload() {
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [lois, setLois] = useState(false);
+  const history = useHistory()
 
   const changeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -115,6 +116,9 @@ export default function CSVUpload() {
             Submit
           </button>
         </div>
+        <button style={{ margin: "1rem 0 0 0" }} className="secondary" onClick={() => history.goBack()}>
+          Back
+        </button>
       </section>
     </div>
   );

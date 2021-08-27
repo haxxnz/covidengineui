@@ -188,7 +188,7 @@ function ExposureLocationsQrCodes({
             className="exposure-location"
             onClick={() => onExposureLocationSelected(el)}
           >
-            <div style={{ marginRight: "1rem" }}>
+            <div style={{ marginRight: "1rem", wordBreak: "break-word" }}>
               <h2>{el.event}</h2>
               <p style={{ color: "rgb(68, 68, 68)" }}>{el.location}</p>
               <ExposureEventDate el={el} />

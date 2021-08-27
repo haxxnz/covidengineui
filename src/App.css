@@ -64,6 +64,7 @@ input[type="file"] {
 
 aside {
   font-size: 20px;
+  word-break: break-word;
 }
 
 button {

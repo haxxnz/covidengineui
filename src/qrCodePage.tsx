@@ -98,12 +98,12 @@ function QRCodeModal({ exposureLocation, closeModal }: Props) {
               height: 0,
               width: 0,
             }}>
-            {[...new Array(10)].map(e => {
+            {[...new Array(10)].map((_e, i) => {
               return (
-                <>
+                <div key={i}>
                   <div style={{width: 1400 * x, height: 70 * x, background: 'rgb(248, 201, 0)'}}></div>
                   <div style={{width: 1400 * x, height: 70 * x, background: 'rgb(255, 255, 255)'}}></div>
-                </>
+                </div>
               )
             })}
           </div>
@@ -305,7 +305,7 @@ function ExposureLocationsQrCodes({
     <>
       {exposureLocations.map((el, i) => {
         return (
-          <div key={i} style={{ display: "flex", justifyContent: "space-between" }} onClick={() => onExposureLocationSelected(el)}>
+          <div key={el.id} style={{ display: "flex", justifyContent: "space-between" }} onClick={() => onExposureLocationSelected(el)}>
             <div style={{ marginRight: "1rem" }}>
               <h2>{el.event}</h2>
               <p style={{color: 'rgb(68, 68, 68)'}}>{el.location}</p>

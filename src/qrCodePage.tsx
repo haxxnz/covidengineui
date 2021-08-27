@@ -131,6 +131,21 @@ export default function AllQRCodes() {
               <br />
             </aside>
 
+            <aside>
+              <strong>How's the number of Locations of Interest calculated?</strong>
+              <div>
+                Locations of Interest tally is calculated from the <a href="https://github.com/minhealthnz/nz-covid-data/blob/main/locations-of-interest/august-2021/locations-of-interest.geojson">data MoH published on GitHub</a>.
+              </div>
+              <br />
+            </aside>
+            <aside>
+              <strong>How's the number of Exposure Event locations calculated?</strong>
+              <div>
+                Exposure Event locations tally is calculated as the number of Locations of Interest which have a corresponding Exposure Event.
+              </div>
+              <br />
+            </aside>
+
             <Link to="/">
               <button style={{ margin: "1rem 0 0 0" }} className="secondary">
                 Back to Start

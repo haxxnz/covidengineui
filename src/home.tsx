@@ -15,7 +15,12 @@ export function Home() {
           <h1>Lenny can help protect you from COVID</h1>
           <aside className="title-description">
             Forgot to scan in? Lenny can automatically check if you’ve been
-            exposed to COVID with your transactions.
+            exposed to COVID with your transactions. <br /> <br />
+            Built as part of of the{" "}
+            <a href="https://govhack.org/" target="_blank">
+              GovHack 2021 Open Data Hackathon
+            </a>
+            . This project is no longer maintained so your mileage may vary!
           </aside>
           <div className="promo-container">
             <img src="./icons/qr.svg" className="promo-icon" alt="lmao" />
